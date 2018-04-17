@@ -31,7 +31,7 @@ return [
         'add' => 'Add new',
         'trash' => 'Trash',
         'config' => 'Configurations',
-        'lang' => 'Languages',
+        'lang' => 'Language',
     ],
 
 
@@ -68,7 +68,7 @@ return [
         'title-add' => 'Add new contact',
         'title-delete' => 'Delete contact',
         'title-config' => 'Current configurations',
-        'title-lang' => 'Manage languages',
+        'title-lang' => 'Language',
     ],
 
 
