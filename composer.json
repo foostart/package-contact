@@ -1,6 +1,6 @@
 {
     "name": "foostart/package-contact",
-    "description": "Manage contact",
+    "description": "Create overview contact can intergrate other project",
     "keywords": [
         "foostart",
         "laravel 5 package contact"
