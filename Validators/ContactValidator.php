@@ -10,7 +10,7 @@ use Illuminate\Support\MessageBag as MessageBag;
 class ContactValidator extends FooValidator
 {
 
-    protected $obj_sample;
+    protected $obj_contact;
 
     public function __construct()
     {

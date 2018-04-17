@@ -20,7 +20,7 @@ class ContactFrontController extends Controller
     public function index(Request $request)
     {
 
-        $obj_sample = new Contacts();
+        $obj_contact = new Contacts();
         $contacts = $obj_contact->get_contacts();
         $this->data = array(
             'request' => $request,
