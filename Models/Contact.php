@@ -1,9 +1,9 @@
-<?php namespace Foostart\Sample\Models;
+<?php namespace Foostart\Contact\Models;
 
 use Foostart\Category\Library\Models\FooModel;
 use Illuminate\Database\Eloquent\Model;
 
-class Sample extends FooModel {
+class Contact extends FooModel {
 
     /**
      * @table categories
@@ -20,22 +20,22 @@ class Sample extends FooModel {
     public function setConfigs() {
 
         //table name
-        $this->table = 'samples';
+        $this->table = 'contacts';
 
         //list of field in table
         $this->fillable = [
-            'sample_name',
+            'contact_name',
             'category_id',
             'user_id',
             'user_full_name',
             'user_email',
-            'sample_status',
+            'contact_status',
         ];
 
         //list of fields for inserting
         $this->fields = [
-            'sample_name' => [
-                'name' => 'sample_name',
+            'contact_name' => [
+                'name' => 'contact_name',
                 'type' => 'Text',
             ],
             'category_id' => [
@@ -58,17 +58,17 @@ class Sample extends FooModel {
 
         //check valid fields for inserting
         $this->valid_insert_fields = [
-            'sample_name',
+            'contact_name',
             'user_id',
             'category_id',
             'user_full_name',
             'updated_at',
-            'sample_status',
+            'contact_status',
         ];
 
         //check valid fields for ordering
         $this->valid_ordering_fields = [
-            'sample_name',
+            'contact_name',
             'updated_at',
             $this->field_status,
         ];
@@ -79,13 +79,13 @@ class Sample extends FooModel {
         ];
 
         //primary key
-        $this->primaryKey = 'sample_id';
+        $this->primaryKey = 'contact_id';
 
         //the number of items on page
         $this->perPage = 10;
 
         //item status
-        $this->field_status = 'sample_status';
+        $this->field_status = 'contact_status';
 
     }
 
@@ -115,9 +115,9 @@ class Sample extends FooModel {
     }
 
     /**
-     * Get a sample by {id}
+     * Get a contact by {id}
      * @param ARRAY $params list of parameters
-     * @return OBJECT sample
+     * @return OBJECT contact
      */
     public function selectItem($params = array(), $key = NULL) {
 
@@ -168,9 +168,9 @@ class Sample extends FooModel {
                 {
                     switch($column)
                     {
-                        case 'sample_name':
+                        case 'contact_name':
                             if (!empty($value)) {
-                                $elo = $elo->where($this->table . '.sample_name', '=', $value);
+                                $elo = $elo->where($this->table . '.contact_name', '=', $value);
                             }
                             break;
                         case 'status':
@@ -181,9 +181,9 @@ class Sample extends FooModel {
                         case 'keyword':
                             if (!empty($value)) {
                                 $elo = $elo->where(function($elo) use ($value) {
-                                    $elo->where($this->table . '.sample_name', 'LIKE', "%{$value}%")
-                                    ->orWhere($this->table . '.sample_description','LIKE', "%{$value}%")
-                                    ->orWhere($this->table . '.sample_overview','LIKE', "%{$value}%");
+                                    $elo->where($this->table . '.contact_name', 'LIKE', "%{$value}%")
+                                    ->orWhere($this->table . '.contact_description','LIKE', "%{$value}%")
+                                    ->orWhere($this->table . '.contact_overview','LIKE', "%{$value}%");
                                 });
                             }
                             break;
@@ -209,7 +209,7 @@ class Sample extends FooModel {
     public function createSelect($elo) {
 
         $elo = $elo->select($this->table . '.*',
-                            $this->table . '.sample_id as id'
+                            $this->table . '.contact_id as id'
                 );
 
         return $elo;
@@ -239,20 +239,20 @@ class Sample extends FooModel {
         }
         $field_status = $this->field_status;
 
-        $sample = $this->selectItem($params);
+        $contact = $this->selectItem($params);
 
-        if (!empty($sample)) {
+        if (!empty($contact)) {
             $dataFields = $this->getDataFields($params, $this->fields);
 
             foreach ($dataFields as $key => $value) {
-                $sample->$key = $value;
+                $contact->$key = $value;
             }
 
-            $sample->$field_status = $this->status['publish'];
+            $contact->$field_status = $this->status['publish'];
 
-            $sample->save();
+            $contact->save();
 
-            return $sample;
+            return $contact;
         } else {
             return NULL;
         }
@@ -262,7 +262,7 @@ class Sample extends FooModel {
     /**
      *
      * @param ARRAY $params list of parameters
-     * @return OBJECT sample
+     * @return OBJECT contact
      */
     public function insertItem($params = []) {
 

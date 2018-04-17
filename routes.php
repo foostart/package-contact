@@ -5,9 +5,9 @@ use Illuminate\Session\TokenMismatchException;
 /**
  * FRONT
  */
-Route::get('sample', [
-    'as' => 'sample',
-    'uses' => 'Foostart\Sample\Controllers\Front\SampleFrontController@index'
+Route::get('contact', [
+    'as' => 'contact',
+    'uses' => 'Foostart\Contact\Controllers\Front\ContactFrontController@index'
 ]);
 
 
@@ -17,17 +17,17 @@ Route::get('sample', [
 Route::group(['middleware' => ['web']], function () {
 
     Route::group(['middleware' => ['admin_logged', 'can_see', 'in_context'],
-                  'namespace' => 'Foostart\Sample\Controllers\Admin',
+                  'namespace' => 'Foostart\Context\Controllers\Admin',
         ], function () {
 
         /*
           |-----------------------------------------------------------------------
-          | Manage sample
+          | Manage contact
           |-----------------------------------------------------------------------
-          | 1. List of samples
-          | 2. Edit sample
-          | 3. Delete sample
-          | 4. Add new sample
+          | 1. List of contact
+          | 2. Edit contact
+          | 3. Delete contact
+          | 4. Add new contact
           | 5. Manage configurations
           | 6. Manage languages
           |
@@ -36,75 +36,75 @@ Route::group(['middleware' => ['web']], function () {
         /**
          * list
          */
-        Route::get('admin/samples/list', [
-            'as' => 'samples.list',
-            'uses' => 'SampleAdminController@index'
+        Route::get('admin/contacts/list', [
+            'as' => 'contacts.list',
+            'uses' => 'ContactAdminController@index'
         ]);
 
         /**
          * edit-add
          */
-        Route::get('admin/samples/edit', [
-            'as' => 'samples.edit',
-            'uses' => 'SampleAdminController@edit'
+        Route::get('admin/contacts/edit', [
+            'as' => 'contacts.edit',
+            'uses' => 'ContactAdminController@edit'
         ]);
 
         /**
          * copy
          */
-        Route::get('admin/samples/copy', [
-            'as' => 'samples.copy',
-            'uses' => 'SampleAdminController@copy'
+        Route::get('admin/contacts/copy', [
+            'as' => 'contacts.copy',
+            'uses' => 'ContactAdminController@copy'
         ]);
 
         /**
          * post
          */
-        Route::post('admin/samples/edit', [
-            'as' => 'samples.post',
-            'uses' => 'SampleAdminController@post'
+        Route::post('admin/contacts/edit', [
+            'as' => 'contacts.post',
+            'uses' => 'ContactAdminController@post'
         ]);
 
         /**
          * delete
          */
-        Route::get('admin/samples/delete', [
-            'as' => 'samples.delete',
-            'uses' => 'SampleAdminController@delete'
+        Route::get('admin/contacts/delete', [
+            'as' => 'contacts.delete',
+            'uses' => 'ContactAdminController@delete'
         ]);
 
         /**
          * trash
          */
-         Route::get('admin/samples/trash', [
-            'as' => 'samples.trash',
-            'uses' => 'SampleAdminController@trash'
+         Route::get('admin/contacts/trash', [
+            'as' => 'contacts.trash',
+            'uses' => 'ContactAdminController@trash'
         ]);
 
         /**
          * configs
         */
-        Route::get('admin/samples/config', [
-            'as' => 'samples.config',
-            'uses' => 'SampleAdminController@config'
+        Route::get('admin/contacts/config', [
+            'as' => 'contacts.config',
+            'uses' => 'ContactAdminController@config'
         ]);
 
-        Route::post('admin/samples/config', [
-            'as' => 'samples.config',
-            'uses' => 'SampleAdminController@config'
+        Route::post('admin/contacts/config', [
+            'as' => 'contacts.config',
+            'uses' => 'ContactAdminController@config'
         ]);
 
         /**
          * language
         */
-        Route::get('admin/samples/lang', [
-            'as' => 'samples.lang',
-            'uses' => 'SampleAdminController@lang'
+        Route::get('admin/contacts/lang', [
+            'as' => 'contacts.lang',
+            'uses' => 'ContactAdminController@lang'
         ]);
 
-        Route::post('admin/samples/lang', [
-            'as' => 'samples.lang',
-            'uses' => 'SampleAdminController@lang'
+        Route::post('admin/contacts/lang', [
+            'as' => 'contacts.lang',
+            'uses' => 'ContactAdminController@lang'
         ]);
 
     });

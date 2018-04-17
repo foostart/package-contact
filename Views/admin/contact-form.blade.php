@@ -1,14 +1,14 @@
 <!------------------------------------------------------------------------------
-| List of elements in sample form
+| List of elements in contact form
 |------------------------------------------------------------------------------->
 
-{!! Form::open(['route'=>['samples.post', 'id' => @$item->id],  'files'=>true, 'method' => 'post'])  !!}
+{!! Form::open(['route'=>['contacts.post', 'id' => @$item->id],  'files'=>true, 'method' => 'post'])  !!}
 
     <!--BUTTONS-->
     <div class='btn-form'>
         <!-- DELETE BUTTON -->
         @if($item)
-            <a href="{!! URL::route('samples.delete',['id' => @$item->id, '_token' => csrf_token()]) !!}"
+            <a href="{!! URL::route('contacts.delete',['id' => @$item->id, '_token' => csrf_token()]) !!}"
             class="btn btn-danger pull-right margin-left-5 delete">
                 {!! trans($plang_admin.'.buttons.delete') !!}
             </a>
@@ -52,15 +52,15 @@
         <!--MENU 1-->
         <div id="menu_1" class="tab-pane fade in active">
 
-            <!--SAMPLE NAME-->
+            <!--CONTACT NAME-->
             @include('package-category::admin.partials.input_text', [
-            'name' => 'sample_name',
+            'name' => 'contact_name',
             'label' => trans($plang_admin.'.labels.name'),
-            'value' => @$item->sample_name,
+            'value' => @$item->contact_name,
             'description' => trans($plang_admin.'.descriptions.name'),
             'errors' => $errors,
             ])
-            <!--/SAMPLE NAME-->
+            <!--/CONTACT NAME-->
 
             <!-- LIST OF CATEGORIES -->
             @include('package-category::admin.partials.select_single', [
@@ -100,5 +100,5 @@
 
 {!! Form::close() !!}
 <!------------------------------------------------------------------------------
-| End list of elements in sample form
+| End list of elements in contact form
 |------------------------------------------------------------------------------>

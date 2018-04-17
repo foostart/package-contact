@@ -1,13 +1,13 @@
-<?php namespace Foostart\Sample\Validators;
+<?php namespace Foostart\Contact\Validators;
 
 use Foostart\Category\Library\Validators\FooValidator;
 use Event;
 use \LaravelAcl\Library\Validators\AbstractValidator;
-use Foostart\Sample\Models\Sample;
+use Foostart\Contact\Models\Contact;
 
 use Illuminate\Support\MessageBag as MessageBag;
 
-class SampleValidator extends FooValidator
+class ContactValidator extends FooValidator
 {
 
     protected $obj_sample;
@@ -16,14 +16,14 @@ class SampleValidator extends FooValidator
     {
         // add rules
         self::$rules = [
-            'sample_name' => ["required"],
+            'contact_name' => ["required"],
         ];
 
         // event listening
         Event::listen('validating', function($input)
         {
             self::$messages = [
-                'sample_name.required' => trans('sample-admin.errors.required', ['attribute' => 'sample name']),
+                'contact_name.required' => trans('contact-admin.errors.required', ['attribute' => 'contact name']),
             ];
         });
 
@@ -31,7 +31,7 @@ class SampleValidator extends FooValidator
         self::$configs = $this->loadConfigs();
 
         // model
-        $this->obj_sample = new Sample();
+        $this->obj_contact = new Contact();
     }
 
     /**
@@ -53,8 +53,8 @@ class SampleValidator extends FooValidator
      */
     public function loadConfigs(){
         $configs = [
-            'min_lenght' => config('package-sample.name_min_length'),
-            'max_lenght' => config('package-sample.name_max_length'),
+            'min_lenght' => config('package-contact.name_min_length'),
+            'max_lenght' => config('package-contact.name_max_length'),
         ];
 
         return $configs;
