@@ -4,9 +4,10 @@ namespace Foostart\Contact;
 
 use Illuminate\Support\ServiceProvider;
 use LaravelAcl\Authentication\Classes\Menu\SentryMenuFactory;
-use URL,
-    Route;
+
+use URL, Route;
 use Illuminate\Http\Request;
+
 
 class ContactServiceProvider extends ServiceProvider {
 
@@ -16,27 +17,30 @@ class ContactServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot(Request $request) {
+        /**
+         * Publish
+         */
+         $this->publishes([
+            __DIR__.'/config/contact_admin.php' => config_path('contact_admin.php'),
+        ],'config');
 
-        //generate context key
-//        $this->generateContextKey();
+        $this->loadViewsFrom(__DIR__ . '/views', 'contact');
 
-        // load view
-        $this->loadViewsFrom(__DIR__ . '/Views', 'package-contact');
 
-        // include view composers
-        require __DIR__ . "/composers.php";
+        /**
+         * Translations
+         */
+         $this->loadTranslationsFrom(__DIR__.'/lang', 'contact');
 
-        // publish config
-        $this->publishConfig();
 
-        // publish lang
-        $this->publishLang();
+        /**
+         * Load view composer
+         */
+        $this->contactViewComposer($request);
 
-        // publish views
-        $this->publishViews();
-
-        // publish assets
-        $this->publishAssets();
+         $this->publishes([
+                __DIR__.'/../database/migrations/' => database_path('migrations')
+            ], 'migrations');
 
     }
 
@@ -47,46 +51,55 @@ class ContactServiceProvider extends ServiceProvider {
      */
     public function register() {
         include __DIR__ . '/routes.php';
+
+        /**
+         * Load controllers
+         */
+        $this->app->make('Foostart\Contact\Controllers\Admin\ContactAdminController');
+
+         /**
+         * Load Views
+         */
+        $this->loadViewsFrom(__DIR__ . '/views', 'contact');
     }
 
     /**
-     * Public config to system
-     * @source: vendor/foostart/package-contact/config
-     * @destination: config/
+     *
      */
-    protected function publishConfig() {
-        $this->publishes([
-            __DIR__ . '/config/package-contact.php' => config_path('package-contact.php'),
-                ], 'config');
-    }
+    public function contactViewComposer(Request $request) {
 
-    /**
-     * Public language to system
-     * @source: vendor/foostart/package-contact/lang
-     * @destination: resources/lang
-     */
-    protected function publishLang() {
-        $this->publishes([
-            __DIR__ . '/lang' => base_path('resources/lang'),
-        ]);
-    }
+        view()->composer('contact::contact*', function ($view) {
+            global $request;
+            $contact_id = $request->get('id');
+            $is_action = empty($contact_id)?'page_add':'page_edit';
 
-    /**
-     * Public view to system
-     * @source: vendor/foostart/package-contact/Views
-     * @destination: resources/views/vendor/package-contact
-     */
-    protected function publishViews() {
+            $view->with('sidebar_items', [
 
-        $this->publishes([
-            __DIR__ . '/Views' => base_path('resources/views/vendor/package-contact'),
-        ]);
-    }
+                /**
+                 * contacts
+                 */
+                //list
+                trans('contact::contact_admin.page_list') => [
+                    'url' => URL::route('admin_contact'),
+                    "icon" => '<i class="fa fa-users"></i>'
+                ],
+                //add
+                trans('contact::contact_admin.'.$is_action) => [
+                    'url' => URL::route('admin_contact.edit'),
+                    "icon" => '<i class="fa fa-users"></i>'
+                ],
 
-    protected function publishAssets() {
-        $this->publishes([
-            __DIR__ . '/public' => public_path('packages/foostart/package-contact'),
-        ]);
+                /**
+                 * Categories
+                 */
+                //list
+                trans('contact::contact_admin.page_category_list') => [
+                    'url' => URL::route('admin_contact_category'),
+                    "icon" => '<i class="fa fa-users"></i>'
+                ],
+            ]);
+            //
+        });
     }
 
 }
