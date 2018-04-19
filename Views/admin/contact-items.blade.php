@@ -48,7 +48,7 @@
                     <div class="panel-body">
                         {!! Form::open(['route'=>['contacts.delete', 'id' => @$item->id], 'method' => 'get'])  !!}
 
-                            @include('package-contact:admin.contact-item')
+                            @include('package-contact::admin.contact-item')
 
                             {!! csrf_field(); !!}
 

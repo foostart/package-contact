@@ -16,82 +16,96 @@ Route::get('contact', [
  */
 Route::group(['middleware' => ['web']], function () {
 
-    Route::group(['middleware' => ['admin_logged', 'can_see']], function () {
+    Route::group(['middleware' => ['admin_logged', 'can_see', ],
+                  'namespace' => 'Foostart\Contact\Controllers\Admin',
+        ], function () {
 
-        ////////////////////////////////////////////////////////////////////////
-        ////////////////////////////contactS ROUTE///////////////////////////////
-        ////////////////////////////////////////////////////////////////////////
+        /*
+          |-----------------------------------------------------------------------
+          | Manage contact
+          |-----------------------------------------------------------------------
+          | 1. List of contacts
+          | 2. Edit contact
+          | 3. Delete contact
+          | 4. Add new contact
+          | 5. Manage configurations
+          | 6. Manage languages
+          |
+        */
+
         /**
          * list
          */
-        Route::get('admin/contact', [
-            'as' => 'admin_contact',
-            'uses' => 'Foostart\Contact\Controllers\Admin\ContactAdminController@index'
+        Route::get('admin/contacts/list', [
+            'as' => 'contacts.list',
+            'uses' => 'ContactAdminController@index'
         ]);
 
         /**
          * edit-add
          */
-        Route::get('admin/contact/edit', [
-            'as' => 'admin_contact.edit',
-            'uses' => 'Foostart\Contact\Controllers\Admin\ContactAdminController@edit'
+        Route::get('admin/contacts/edit', [
+            'as' => 'contacts.edit',
+            'uses' => 'ContactAdminController@edit'
+        ]);
+
+        /**
+         * copy
+         */
+        Route::get('admin/contacts/copy', [
+            'as' => 'contacts.copy',
+            'uses' => 'ContactAdminController@copy'
         ]);
 
         /**
          * post
          */
-        Route::post('admin/contact/edit', [
-            'as' => 'admin_contact.post',
-            'uses' => 'Foostart\Contact\Controllers\Admin\ContactAdminController@post'
+        Route::post('admin/contacts/edit', [
+            'as' => 'contacts.post',
+            'uses' => 'ContactAdminController@post'
         ]);
 
         /**
          * delete
          */
-        Route::get('admin/contact/delete', [
-            'as' => 'admin_contact.delete',
-            'uses' => 'Foostart\Contact\Controllers\Admin\ContactAdminController@delete'
-        ]);
-        ////////////////////////////////////////////////////////////////////////
-        ////////////////////////////contactS ROUTE///////////////////////////////
-        ////////////////////////////////////////////////////////////////////////
-
-
-
-
-        
-        ////////////////////////////////////////////////////////////////////////
-        ////////////////////////////CATEGORIES///////////////////////////////
-        ////////////////////////////////////////////////////////////////////////
-         Route::get('admin/contact_category', [
-            'as' => 'admin_contact_category',
-            'uses' => 'Foostart\Contact\Controllers\Admin\ContactCategoryAdminController@index'
+        Route::get('admin/contacts/delete', [
+            'as' => 'contacts.delete',
+            'uses' => 'ContactAdminController@delete'
         ]);
 
         /**
-         * edit-add
+         * trash
          */
-        Route::get('admin/contact_category/edit', [
-            'as' => 'admin_contact_category.edit',
-            'uses' => 'Foostart\Contact\Controllers\Admin\ContactCategoryAdminController@edit'
+         Route::get('admin/contacts/trash', [
+            'as' => 'contacts.trash',
+            'uses' => 'ContactAdminController@trash'
         ]);
 
         /**
-         * post
-         */
-        Route::post('admin/contact_category/edit', [
-            'as' => 'admin_contact_category.post',
-            'uses' => 'Foostart\Contact\Controllers\Admin\ContactCategoryAdminController@post'
+         * configs
+        */
+        Route::get('admin/contacts/config', [
+            'as' => 'contacts.config',
+            'uses' => 'ContactAdminController@config'
         ]);
-         /**
-         * delete
-         */
-        Route::get('admin/contact_category/delete', [
-            'as' => 'admin_contact_category.delete',
-            'uses' => 'Foostart\Contact\Controllers\Admin\ContactCategoryAdminController@delete'
+
+        Route::post('admin/contacts/config', [
+            'as' => 'contacts.config',
+            'uses' => 'ContactAdminController@config'
         ]);
-        ////////////////////////////////////////////////////////////////////////
-        ////////////////////////////CATEGORIES///////////////////////////////
-        ////////////////////////////////////////////////////////////////////////
+
+        /**
+         * language
+        */
+        Route::get('admin/contacts/lang', [
+            'as' => 'contacts.lang',
+            'uses' => 'ContactAdminController@lang'
+        ]);
+
+        Route::post('admin/contacts/lang', [
+            'as' => 'contacts.lang',
+            'uses' => 'ContactAdminController@lang'
+        ]);
+
     });
 });

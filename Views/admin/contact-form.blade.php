@@ -52,7 +52,7 @@
         <!--MENU 1-->
         <div id="menu_1" class="tab-pane fade in active">
 
-            <!--CONTACT NAME-->
+            <!--contact NAME-->
             @include('package-category::admin.partials.input_text', [
             'name' => 'contact_name',
             'label' => trans($plang_admin.'.labels.name'),
@@ -60,7 +60,7 @@
             'description' => trans($plang_admin.'.descriptions.name'),
             'errors' => $errors,
             ])
-            <!--/CONTACT NAME-->
+            <!--/contact NAME-->
 
             <!-- LIST OF CATEGORIES -->
             @include('package-category::admin.partials.select_single', [
@@ -78,14 +78,51 @@
 
         <!--MENU 2-->
         <div id="menu_2" class="tab-pane fade">
-            <h3>Menu 1</h3>
-            <p>Some content in menu 1.</p>
+            <!--contact OVERVIEW-->
+            @include('package-category::admin.partials.textarea', [
+            'name' => 'contact_overview',
+            'label' => trans($plang_admin.'.labels.overview'),
+            'value' => @$item->contact_overview,
+            'description' => trans($plang_admin.'.descriptions.overview'),
+            'tinymce' => false,
+            'errors' => $errors,
+            ])
+            <!--/contact OVERVIEW-->
+
+            <!--contact DESCRIPTION-->
+            @include('package-category::admin.partials.textarea', [
+            'name' => 'contact_description',
+            'label' => trans($plang_admin.'.labels.description'),
+            'value' => @$item->contact_description,
+            'description' => trans($plang_admin.'.descriptions.description'),
+            'rows' => 50,
+            'tinymce' => true,
+            'errors' => $errors,
+            ])
+            <!--/contact DESCRIPTION-->
         </div>
 
         <!--MENU 3-->
         <div id="menu_3" class="tab-pane fade">
-            <h3>Menu 2</h3>
-            <p>Some content in menu 2.</p>
+            <!--contact IMAGE-->
+            @include('package-category::admin.partials.input_image', [
+            'name' => 'contact_image',
+            'label' => trans($plang_admin.'.labels.image'),
+            'value' => @$item->contact_image,
+            'description' => trans($plang_admin.'.descriptions.image'),
+            'errors' => $errors,
+            ])
+            <!--/contact IMAGE-->
+
+            <!--contact FILES-->
+            @include('package-category::admin.partials.input_files', [
+                'name' => 'files',
+                'label' => trans($plang_admin.'.labels.files'),
+                'value' => @$item->contact_files,
+                'description' => trans($plang_admin.'.descriptions.files'),
+                'errors' => $errors,
+            ])
+            <!--/contact FILES-->
         </div>
 
     </div>
