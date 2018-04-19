@@ -153,5 +153,5 @@
 
 @section('footer_scripts')
     @parent
-    {!! HTML::script('packages/foostart/package-contact/js/form-table.js')  !!}
+    {!! HTML::script('packages/foostart/package-contact/js/contacts.js')  !!}
 @stop
