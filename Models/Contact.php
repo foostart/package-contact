@@ -74,6 +74,11 @@ class Contact extends FooModel {
                 'name' => 'files',
                 'type' => 'Json',
             ],
+            'contact_status' => [
+                'name' => 'contact_status',
+                'type' => 'Int',
+            ],
+            
         ];
 
         //check valid fields for inserting
@@ -88,6 +93,7 @@ class Contact extends FooModel {
             'contact_image',
             'contact_files',
             'contact_status',
+            '',
         ];
 
         //check valid fields for ordering
@@ -202,6 +208,7 @@ class Contact extends FooModel {
                                 $elo = $elo->where($this->table . '.'.$this->field_status, '=', $value);
                             }
                             break;
+                        
                         case 'keyword':
                             if (!empty($value)) {
                                 $elo = $elo->where(function($elo) use ($value) {
@@ -216,11 +223,7 @@ class Contact extends FooModel {
                     }
                 }
             }
-        } elseif ($by_status) {
-
-            $elo = $elo->where($this->table . '.'.$this->field_status, '=', $this->status['publish']);
-
-        }
+        } 
 
         return $elo;
     }
@@ -267,12 +270,11 @@ class Contact extends FooModel {
 
         if (!empty($contact)) {
             $dataFields = $this->getDataFields($params, $this->fields);
-
+            
             foreach ($dataFields as $key => $value) {
                 $contact->$key = $value;
             }
 
-            $contact->$field_status = $this->status['publish'];
 
             $contact->save();
 
@@ -292,7 +294,7 @@ class Contact extends FooModel {
 
         $dataFields = $this->getDataFields($params, $this->fields);
 
-        $dataFields[$this->field_status] = $this->status['publish'];
+     
 
 
         $item = self::create($dataFields);
@@ -327,5 +329,16 @@ class Contact extends FooModel {
 
         return FALSE;
     }
+
+
+    /**
+     * Get list of statuses to push to select
+     * @return ARRAY list of statuses
+     */
+    public function getPluckStatus() {
+        $pluck_status = config('package-contact.status.list');
+        return $pluck_status;
+     }
+
 
 }

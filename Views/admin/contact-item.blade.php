@@ -19,7 +19,7 @@
         {!! trans($plang_admin.'.descriptions.counters', ['number' => $nav['total']]) !!}
     @endif
 </caption>
-
+<div class="table-responsive">
 <table class="table table-hover">
 
     <thead>
@@ -34,6 +34,21 @@
             <?php $name = 'contact_name' ?>
 
             <th class="hidden-xs" style='width:{{ $withs['name'] }}'>{!! trans($plang_admin.'.columns.name') !!}
+                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
+                    @if($sorting['items'][$name] == 'asc')
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    @elseif($sorting['items'][$name] == 'desc')
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    @endif
+                </a>
+            </th>
+
+            <!--REF-->
+            <?php $name = 'contact_status' ?>
+
+            <th class="hidden-xs" style='width:{{ $withs['name'] }}'>{!! trans($plang_admin.'.columns.contact-status') !!}
                 <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
                     @if($sorting['items'][$name] == 'asc')
                         <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
@@ -91,6 +106,17 @@
                 <!--NAME-->
                 <td> {!! $item->contact_name !!} </td>
 
+                <!--STATUS-->
+                <td style="text-align: center;">
+
+                    <?php $status = config('package-contact.status'); ?>
+                    @if($item->contact_status && (isset($status['list'][$item->contact_status])))
+                        <i class="fa fa-circle" style="color:{!! $status['color'][$item->contact_status] !!}" title='{!! $status["list"][$item->contact_status] !!}'></i>
+                    @else
+                    <i class="fa fa-circle-o red" title='{!! trans($plang_admin.".labels.unknown") !!}'></i>
+                    @endif
+                </td>
+
                 <!--UPDATED AT-->
                 <td> {!! $item->updated_at !!} </td>
 
@@ -138,6 +164,7 @@
     </tbody>
 
 </table>
+</div>
 <div class="paginator">
     {!! $items->appends($request->except(['page']) )->render() !!}
 </div>

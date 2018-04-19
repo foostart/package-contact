@@ -74,6 +74,15 @@
             'errors' => $errors,
             ])
             <!-- /LIST OF CATEGORIES -->
+
+            <!--STATUS-->
+            @include('package-category::admin.partials.radio', [
+                'name' => 'contact_status',
+                'label' => trans($plang_admin.'.labels.contact-status'),
+                'value' => @$item->contact_status,
+                'description' => trans($plang_admin.'.descriptions.contact-status'),
+                'items' => $statuses
+            ])
         </div>
 
         <!--MENU 2-->
