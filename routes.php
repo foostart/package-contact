@@ -107,5 +107,13 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'ContactAdminController@lang'
         ]);
 
+        /**
+         * search
+        */
+        Route::get('admin/contacts/search', [
+                'as' => 'contacts.search',
+                'uses' => 'ContactAdminController@search'
+            ]);
+
     });
 });

@@ -48,7 +48,7 @@
             <!--REF-->
             <?php $name = 'contact_status' ?>
 
-            <th class="hidden-xs" style='width:{{ $withs['name'] }}'>{!! trans($plang_admin.'.columns.contact-status') !!}
+            <th class="hidden-xs" style='width:{{ $withs['name'] }}'>{!! trans($plang_admin.'.columns.status') !!}
                 <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
                     @if($sorting['items'][$name] == 'asc')
                         <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
@@ -180,5 +180,5 @@
 
 @section('footer_scripts')
     @parent
-    {!! HTML::script('packages/foostart/package-contact/js/contacts.js')  !!}
+    {!! HTML::script('packages/foostart/package-contact/public/js/form-table.js') !!}
 @stop

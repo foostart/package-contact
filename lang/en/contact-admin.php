@@ -52,7 +52,7 @@ return [
         'operations' => 'Operations',
         'updated_at' => 'Updated at',
         'filename' => 'File name',
-        'contact-status' => 'contact-status',
+        'status'    => 'Status',
     ],
 
 
@@ -137,6 +137,8 @@ return [
         'not-found' => 'Not found items',
         'config' => 'List of configurations',
         'lang' => 'List of languages',
+        'contact-status' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'member'    => 'Search member',
     ],
 
 
@@ -174,7 +176,10 @@ return [
         'description' => 'Contact Description',
         'overview' => 'Contact Overview',
         'slug' => 'Slug',
-        'updated_at' => 'Updated at'
+        'updated_at' => 'Updated at',
+        'user-id'   => 'ID',
+        'last-name' => 'Last name',
+        'first-name'    => 'First name',
     ],
 
 
@@ -199,6 +204,10 @@ return [
         'title-search' => 'Search contact',
         'title-backup' => 'Backups',
         'config' => 'Configurations',
+        'contact-status'    => 'Status',
+        'assigner'        => 'Add assigner',
+        'search'        => 'Search User Data',
+        'total-data'    => 'Total Data :',
     ],
 
 
@@ -215,16 +224,16 @@ return [
     |
       */
     'tabs' => [
-        'menu_1' => 'Basic',
-        'menu_2' => 'Advance',
-        'menu_3' => 'Other',
-        'menu_4' => 'Menu 4',
-        'menu_5' => 'Menu 5',
-        'menu_6' => 'Menu 6',
-        'menu_7' => 'Menu 7',
-        'menu_8' => 'Menu 8',
-        'menu_9' => 'Menu 9',
-        'menu_9' => 'Menu 9',
+        'menu-1' => 'Basic',
+        'menu-2' => 'Advance',
+        'menu-3' => 'Other',
+        'menu-4' => 'Assigner',
+        'menu-5' => 'Answer',
+        'menu-6' => 'Menu 6',
+        'menu-7' => 'Menu 7',
+        'menu-8' => 'Menu 8',
+        'menu-9' => 'Menu 9',
+        'menu-9' => 'Menu 9',
         'guide'  => 'Guide',
         'other'  => 'Other',
         'basic'  => 'Basic',

@@ -34,6 +34,8 @@ class Contact extends FooModel {
             'contact_image',
             'contact_files',
             'contact_status',
+            'user_id_assigner',
+            'contact_answer',
         ];
 
         //list of fields for inserting
@@ -78,6 +80,10 @@ class Contact extends FooModel {
                 'name' => 'contact_status',
                 'type' => 'Int',
             ],
+            'user_id_assigner' => [
+                'name' => 'user_id_assigner',
+                'type' => 'Json',
+                ],
             
         ];
 
@@ -93,7 +99,7 @@ class Contact extends FooModel {
             'contact_image',
             'contact_files',
             'contact_status',
-            '',
+            'user_id_assigner',
         ];
 
         //check valid fields for ordering

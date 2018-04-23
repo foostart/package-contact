@@ -26,21 +26,35 @@
         <!--MENU 1-->
         <li class="active">
             <a data-toggle="tab" href="#menu_1">
-                {!! trans($plang_admin.'.tabs.menu_1') !!}
+                {!! trans($plang_admin.'.tabs.menu-1') !!}
             </a>
         </li>
 
         <!--MENU 2-->
         <li>
             <a data-toggle="tab" href="#menu_2">
-                {!! trans($plang_admin.'.tabs.menu_2') !!}
+                {!! trans($plang_admin.'.tabs.menu-2') !!}
             </a>
         </li>
 
         <!--MENU 3-->
         <li>
             <a data-toggle="tab" href="#menu_3">
-                {!! trans($plang_admin.'.tabs.menu_3') !!}
+                {!! trans($plang_admin.'.tabs.menu-3') !!}
+            </a>
+        </li>
+
+        <!--MENU 4-->
+        <li>
+            <a data-toggle="tab" href="#menu_4">
+                {!! trans($plang_admin.'.tabs.menu-4') !!}
+            </a>
+        </li>
+
+        <!--MENU 5-->
+        <li>
+            <a data-toggle="tab" href="#menu_5">
+                {!! trans($plang_admin.'.tabs.menu-5') !!}
             </a>
         </li>
     </ul>
@@ -132,6 +146,32 @@
                 'errors' => $errors,
             ])
             <!--/contact FILES-->
+        </div>
+
+        <!--MENU 4-->
+        <div id="menu_4" class="tab-pane fade in active">
+
+            <!--contact SEARCH-->
+            @include('package-contact::admin.partials.search')
+            <!--/contact SEARCH-->
+
+            
+        </div>
+
+        <!--MENU 5-->
+        <div id="menu_5" class="tab-pane fade">
+
+            <!--contact DESCRIPTION-->
+            @include('package-category::admin.partials.textarea', [
+            'name' => 'contact_answer',
+            'label' => trans($plang_admin.'.labels.answer'),
+            'value' => @$item->contact_answer,
+            'description' => trans($plang_admin.'.descriptions.answer'),
+            'rows' => 50,
+            'tinymce' => true,
+            'errors' => $errors,
+            ])
+            <!--/contact DESCRIPTION-->
         </div>
 
     </div>
