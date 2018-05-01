@@ -113,7 +113,15 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('admin/contacts/search', [
                 'as' => 'contacts.search',
                 'uses' => 'ContactAdminController@search'
-            ]);
+        ]);
+
+        /**
+         * sample
+        */
+        Route::get('admin/contacts/sample', [
+            'as' => 'contacts.sample',
+            'uses' => 'ContactAdminController@sample'
+        ]);
 
     });
 });

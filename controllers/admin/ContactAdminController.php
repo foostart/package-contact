@@ -28,7 +28,7 @@ class ContactAdminController extends FooController {
     public $obj_category = NULL;
 
     public $statuses = NULL;
-
+    public $obj_sample = NULL;
     public function __construct() {
 
         parent::__construct();
@@ -57,12 +57,14 @@ class ContactAdminController extends FooController {
                 'edit'  => $this->package_name.'::admin.'.$this->package_base_name.'-edit',
                 'config'  => $this->package_name.'::admin.'.$this->package_base_name.'-config',
                 'lang'  => $this->package_name.'::admin.'.$this->package_base_name.'-lang',
+                'sample'  => $this->package_name.'::admin.'.$this->package_base_name.'-sample',
             ]
         ];
 
         $this->data_view['status'] = $this->obj_item->getPluckStatus();
 
         $this->statuses = config('package-contact.status.list');
+        $this->obj_sample = config('package-contact.sample.list');
 
 
         // //set category
@@ -447,5 +449,49 @@ class ContactAdminController extends FooController {
                 
         }  
     } 
+
+    /**
+     * Show sample
+     * @return view sample
+     * @date 24/04/2018
+     */
+    public function sample(Request $request) {
+        
+        $item = NULL;
+        $categories = NULL;
+
+        $params = $request->all();
+        $params['id'] = $request->get('id', NULL);
+
+        $context = $this->obj_item->getContext($this->category_ref_name);
+
+        if (!empty($params['id'])) {
+
+            $item = $this->obj_item->selectItem($params, FALSE);
+
+            if (empty($item)) {
+                return Redirect::route($this->root_router.'.list')
+                                ->withMessage(trans($this->plang_admin.'.actions.edit-error'));
+            }
+        }
+
+        //get categories by context
+        $context = $this->obj_item->getContext($this->category_ref_name);
+        if ($context) {
+            $params['context_id'] = $context->context_id;
+            $categories = $this->obj_category->pluckSelect($params);
+        }
+
+        // display view
+        $this->data_view = array_merge($this->data_view, array(
+            'item' => $item,
+            'categories' => $categories,
+            'request' => $request,
+            'context' => $context,
+            'statuses' => $this->statuses,
+        ));
+        return view($this->page_views['admin']['sample'], $this->data_view);
+    }
+
 
 }

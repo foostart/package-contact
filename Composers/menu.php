@@ -21,6 +21,7 @@ View::composer([
                 'package-contact::admin.contact-search',
                 'package-contact::admin.contact-config',
                 'package-contact::admin.contact-lang',
+                'package-contact::admin.contact-sample',
     ], function ($view) {
 
         /**
@@ -58,6 +59,10 @@ View::composer([
             trans('contact-admin.sidebar.lang') => [
                 "url" => URL::route('contacts.lang', []),
                 'icon' => '<i class="fa fa-language" aria-hidden="true"></i>'
+            ],
+            trans('contact-admin.sidebar.sample') => [
+                "url" => URL::route('contacts.sample', []),
+                'icon' => '<i class="fa fa-envelope-o" aria-hidden="true"></i>'
             ],
         ]);
 

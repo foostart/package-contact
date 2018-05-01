@@ -139,6 +139,9 @@ return [
         'lang' => 'List of languages',
         'contact-status' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
         'member'    => 'Search member',
+        'email'    => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'message'    => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'answer'    => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
     ],
 
 
@@ -208,6 +211,9 @@ return [
         'assigner'        => 'Add assigner',
         'search'        => 'Search User Data',
         'total-data'    => 'Total Data :',
+        'email'        => 'Email',
+        'message'        => 'Message',
+        'answer'        => 'Answer',
     ],
 
 
