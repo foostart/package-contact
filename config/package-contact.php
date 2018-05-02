@@ -15,6 +15,18 @@ return [
             'min' => 255,
             'max' => 0,//unlimit
         ],
+        'contact_title' => [
+            'min' => 10,
+            'max' => 255,
+        ],
+        'contact_email' => [
+            'min' => 10,
+            'max' => 255,
+        ],
+        'contact_message' => [
+            'min' => 10,
+            'max' => 255,
+        ],
     ],
     'per_page' => 1,
 

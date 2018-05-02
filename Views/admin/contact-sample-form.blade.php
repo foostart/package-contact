@@ -2,7 +2,7 @@
 | List of elements in contact form
 |------------------------------------------------------------------------------->
 
-{!! Form::open(['route'=>['contacts.post', 'id' => @$item->id],  'files'=>true, 'method' => 'post'])  !!}
+{!! Form::open(['route'=>['contacts.postSample', 'id' => @$item->id],  'files'=>true, 'method' => 'post'])  !!}
 
     <!--BUTTONS-->
     <div class='btn-form'>
@@ -28,22 +28,23 @@
         <!--MENU 1-->
         <div id="menu_1" class="tab-pane fade in active">
 
-            <!--contact NAME-->
+            <!--contact title-->
             @include('package-category::admin.partials.input_text', [
-            'name' => 'contact_name',
-            'label' => trans($plang_admin.'.labels.name'),
-            'value' => @$item->contact_name,
-            'description' => trans($plang_admin.'.descriptions.name'),
+            'name' => 'contact_title',
+            'label' => trans($plang_admin.'.labels.title'),
+            'value' => @$item->contact_title,
+            'description' => trans($plang_admin.'.descriptions.title'),
             'errors' => $errors,
             ])
-            <!--/contact NAME-->
+            <!--/contact title-->
 
             <!--contact email-->
-            @include('package-category::admin.partials.input_text', [
+            @include('package-category::admin.partials.textarea', [
             'name' => 'contact_email',
             'label' => trans($plang_admin.'.labels.email'),
             'value' => @$item->contact_email,
             'description' => trans($plang_admin.'.descriptions.email'),
+            'tinymce' => false,
             'errors' => $errors,
             ])
             <!--/contact email-->

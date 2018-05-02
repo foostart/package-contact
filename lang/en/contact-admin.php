@@ -142,6 +142,7 @@ return [
         'email'    => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
         'message'    => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
         'answer'    => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'title'    => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
     ],
 
 
@@ -183,6 +184,7 @@ return [
         'user-id'   => 'ID',
         'last-name' => 'Last name',
         'first-name'    => 'First name',
+        'contact-status' => 'Contact Status',
     ],
 
 
@@ -214,6 +216,7 @@ return [
         'email'        => 'Email',
         'message'        => 'Message',
         'answer'        => 'Answer',
+        'title'        => 'Title',
     ],
 
 

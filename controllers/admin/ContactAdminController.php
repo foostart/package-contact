@@ -465,15 +465,7 @@ class ContactAdminController extends FooController {
 
         $context = $this->obj_item->getContext($this->category_ref_name);
 
-        if (!empty($params['id'])) {
-
-            $item = $this->obj_item->selectItem($params, FALSE);
-
-            if (empty($item)) {
-                return Redirect::route($this->root_router.'.list')
-                                ->withMessage(trans($this->plang_admin.'.actions.edit-error'));
-            }
-        }
+        
 
         //get categories by context
         $context = $this->obj_item->getContext($this->category_ref_name);
@@ -491,6 +483,43 @@ class ContactAdminController extends FooController {
             'statuses' => $this->statuses,
         ));
         return view($this->page_views['admin']['sample'], $this->data_view);
+    }
+/**
+     * Add sample
+     * @return view sample
+     * @date 02/05/2018
+     */
+    public function postSample(Request $request) {
+
+        $item = NULL;
+       
+        $params = array_merge($request->all(), $this->getUser());
+
+        $is_valid_request = $this->isValidRequest($request);
+
+        $id = (int) $request->get('id');
+
+      
+
+
+            // add new item
+            
+                $item = $this->obj_item->insertItem($params);
+
+                if (!empty($item)) {
+
+                    //message
+                    return Redirect::route($this->root_router.'.sample', ["id" => $item->id])
+                                    ->withMessage(trans($this->plang_admin.'.actions.add-ok'));
+                } else {
+
+                    //message
+                    return Redirect::route($this->root_router.'.sample', ["id" => $item->id])
+                                    ->withMessage(trans($this->plang_admin.'.actions.add-error'));
+               
+
+        
+        }
     }
 
 

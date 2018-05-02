@@ -123,5 +123,10 @@ Route::group(['middleware' => ['web']], function () {
             'uses' => 'ContactAdminController@sample'
         ]);
 
+        Route::post('admin/contacts/postSample', [
+            'as' => 'contacts.postSample',
+            'uses' => 'ContactAdminController@postSample'
+        ]);
+
     });
 });

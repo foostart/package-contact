@@ -36,6 +36,10 @@ class Contact extends FooModel {
             'contact_status',
             'user_id_assigner',
             'contact_answer',
+            'contact_title',
+            'contact_email',
+            'contact_message',
+
         ];
 
         //list of fields for inserting
@@ -83,7 +87,19 @@ class Contact extends FooModel {
             'user_id_assigner' => [
                 'name' => 'user_id_assigner',
                 'type' => 'Json',
-                ],
+            ],
+            'contact_title' => [
+                'name' => 'contact_title',
+                'type' => 'Text',
+            ],
+            'contact_email' => [
+                'name' => 'contact_email',
+                'type' => 'Text',
+            ],
+            'contact_message' => [
+                'name' => 'contact_message',
+                'type' => 'Text',
+            ],
             
         ];
 
@@ -100,10 +116,13 @@ class Contact extends FooModel {
             'contact_files',
             'contact_status',
             'user_id_assigner',
+            'contact_title',
+            'contact_email',
         ];
 
         //check valid fields for ordering
         $this->valid_ordering_fields = [
+            'contact_id',
             'contact_name',
             'updated_at',
             $this->field_status,

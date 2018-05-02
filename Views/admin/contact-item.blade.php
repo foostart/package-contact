@@ -26,8 +26,18 @@
         <tr style="height: 50px;">
 
             <!--ORDER-->
-            <th style='width:{{ $withs['order'] }}'>
-                {{ trans($plang_admin.'.columns.order') }}
+            <?php $name = 'id' ?>
+
+            <th class="hidden-xs" style='width:{{ $withs['name'] }}'>#
+                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
+                    @if($sorting['items'][$name] == 'asc')
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    @elseif($sorting['items'][$name] == 'desc')
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    @endif
+                </a>
             </th>
 
             <!-- NAME -->
@@ -101,7 +111,7 @@
         @foreach($items as $item)
             <tr>
                 <!--COUNTER-->
-                <td> <?php echo $counter; $counter++ ?> </td>
+                <td> {!! $item->contact_id !!}</td>
 
                 <!--NAME-->
                 <td> {!! $item->contact_name !!} </td>
