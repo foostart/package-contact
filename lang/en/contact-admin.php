@@ -53,6 +53,11 @@ return [
         'updated_at' => 'Updated at',
         'filename' => 'File name',
         'status'    => 'Status',
+        'user_id_assigner' => 'User ID Assigner',
+        'answer' => 'Answer',
+        'title' => 'Title',
+        'email' => 'Email',
+        'message' => 'Message',
     ],
 
 

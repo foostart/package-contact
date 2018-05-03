@@ -76,6 +76,11 @@ View::composer([
             'contact_name' => trans($plang_admin.'.fields.name'),
             'contact_status' => trans($plang_admin.'.fields.contact-status'),
             'updated_at' => trans($plang_admin.'.fields.updated_at'),
+            'user_id_assigner' => trans($plang_admin.'.fields.user-id-assigner'),
+            'contact_answer' => trans($plang_admin.'.fields.contact-answer'),
+            'contact_title' => trans($plang_admin.'.fields.contact-title'),
+            'contact_email' => trans($plang_admin.'.fields.contact-email'),
+            'contact_message' => trans($plang_admin.'.fields.contact-message'),
         ];
         $sorting = [
             'label' => $orders,

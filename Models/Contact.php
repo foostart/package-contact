@@ -88,6 +88,10 @@ class Contact extends FooModel {
                 'name' => 'user_id_assigner',
                 'type' => 'Json',
             ],
+            'contact_answer' => [
+                'name' => 'contact_answer',
+                'type' => 'Text',
+            ],
             'contact_title' => [
                 'name' => 'contact_title',
                 'type' => 'Text',
@@ -114,6 +118,7 @@ class Contact extends FooModel {
             'contact_description',
             'contact_image',
             'contact_files',
+            'contact_answer',
             'contact_status',
             'user_id_assigner',
             'contact_title',
@@ -364,6 +369,32 @@ class Contact extends FooModel {
         $pluck_status = config('package-contact.status.list');
         return $pluck_status;
      }
+
+    /**
+     *
+     * @param ARRAY $params list of parameters
+     * @return OBJECT contact
+     */
+    public function insertSample($params = []) {
+
+        $dataFields = $this->getDataFields($params, $this->fields);
+
+        $contact = new Contact;
+        $contact->fill($params);
+        $contact->save();
+
+
+        // $item = self::create($dataFields);
+
+        // $key = $this->primaryKey;
+        // $item->id = $item->$key;
+
+        return $contact;
+    }
+
+
+     
+
 
 
 }

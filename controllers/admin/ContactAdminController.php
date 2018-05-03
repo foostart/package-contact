@@ -463,24 +463,11 @@ class ContactAdminController extends FooController {
         $params = $request->all();
         $params['id'] = $request->get('id', NULL);
 
-        $context = $this->obj_item->getContext($this->category_ref_name);
-
-        
-
-        //get categories by context
-        $context = $this->obj_item->getContext($this->category_ref_name);
-        if ($context) {
-            $params['context_id'] = $context->context_id;
-            $categories = $this->obj_category->pluckSelect($params);
-        }
-
         // display view
         $this->data_view = array_merge($this->data_view, array(
             'item' => $item,
             'categories' => $categories,
             'request' => $request,
-            'context' => $context,
-            'statuses' => $this->statuses,
         ));
         return view($this->page_views['admin']['sample'], $this->data_view);
     }
@@ -489,13 +476,12 @@ class ContactAdminController extends FooController {
      * @return view sample
      * @date 02/05/2018
      */
-    public function postSample(Request $request) {
+    public function addSample(Request $request) {
 
         $item = NULL;
        
-        $params = array_merge($request->all(), $this->getUser());
+        $params = $request->all();
 
-        $is_valid_request = $this->isValidRequest($request);
 
         $id = (int) $request->get('id');
 
@@ -504,22 +490,10 @@ class ContactAdminController extends FooController {
 
             // add new item
             
-                $item = $this->obj_item->insertItem($params);
+                $item = $this->obj_item->insertSample($params);
 
-                if (!empty($item)) {
-
-                    //message
-                    return Redirect::route($this->root_router.'.sample', ["id" => $item->id])
-                                    ->withMessage(trans($this->plang_admin.'.actions.add-ok'));
-                } else {
-
-                    //message
-                    return Redirect::route($this->root_router.'.sample', ["id" => $item->id])
-                                    ->withMessage(trans($this->plang_admin.'.actions.add-error'));
-               
-
+                return redirect()->back();
         
-        }
     }
 
 

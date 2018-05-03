@@ -2,18 +2,11 @@
 | List of elements in contact form
 |------------------------------------------------------------------------------->
 
-{!! Form::open(['route'=>['contacts.postSample', 'id' => @$item->id],  'files'=>true, 'method' => 'post'])  !!}
+{!! Form::open(['route'=>['contacts.sample', 'id' => @$item->id],  'files'=>true, 'method' => 'post'])  !!}
 
     <!--BUTTONS-->
     <div class='btn-form'>
-        <!-- DELETE BUTTON -->
-        @if($item)
-            <a href="{!! URL::route('contacts.delete',['id' => @$item->id, '_token' => csrf_token()]) !!}"
-            class="btn btn-danger pull-right margin-left-5 delete">
-                {!! trans($plang_admin.'.buttons.delete') !!}
-            </a>
-        @endif
-        <!-- DELETE BUTTON -->
+    
 
         <!-- SAVE BUTTON -->
         {!! Form::submit(trans($plang_admin.'.buttons.save'), array("class"=>"btn btn-info pull-right ")) !!}
@@ -29,7 +22,7 @@
         <div id="menu_1" class="tab-pane fade in active">
 
             <!--contact title-->
-            @include('package-category::admin.partials.input_text', [
+            @include('package-contact::admin.partials.input_text', [
             'name' => 'contact_title',
             'label' => trans($plang_admin.'.labels.title'),
             'value' => @$item->contact_title,
@@ -39,7 +32,7 @@
             <!--/contact title-->
 
             <!--contact email-->
-            @include('package-category::admin.partials.textarea', [
+            @include('package-contact::admin.partials.textarea', [
             'name' => 'contact_email',
             'label' => trans($plang_admin.'.labels.email'),
             'value' => @$item->contact_email,
@@ -50,7 +43,7 @@
             <!--/contact email-->
 
             <!--contact message-->
-            @include('package-category::admin.partials.textarea', [
+            @include('package-contact::admin.partials.textarea', [
             'name' => 'contact_message',
             'label' => trans($plang_admin.'.labels.message'),
             'value' => @$item->contact_message,

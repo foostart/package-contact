@@ -69,6 +69,81 @@
                     @endif
                 </a>
             </th>
+            
+            <!-- USER ID -->
+            <?php $name = 'user_id_assigner' ?>
+
+            <th class="hidden-xs" style='width:{{ $withs['updated_at'] }}'>{!! trans($plang_admin.'.columns.user_id_assigner') !!}
+                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
+                    @if($sorting['items'][$name] == 'asc')
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    @elseif($sorting['items'][$name] == 'desc')
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    @endif
+                </a>
+            </th>
+
+            <!-- ANSWER -->
+            <?php $name = 'contact_answer' ?>
+
+            <th class="hidden-xs" style='width:{{ $withs['updated_at'] }}'>{!! trans($plang_admin.'.columns.answer') !!}
+                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
+                    @if($sorting['items'][$name] == 'asc')
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    @elseif($sorting['items'][$name] == 'desc')
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    @endif
+                </a>
+            </th>
+
+            <!-- TITLE -->
+            <?php $name = 'contact_title' ?>
+
+            <th class="hidden-xs" style='width:{{ $withs['updated_at'] }}'>{!! trans($plang_admin.'.columns.title') !!}
+                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
+                    @if($sorting['items'][$name] == 'asc')
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    @elseif($sorting['items'][$name] == 'desc')
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    @endif
+                </a>
+            </th>
+
+            <!-- EMAIL -->
+            <?php $name = 'contact_email' ?>
+
+            <th class="hidden-xs" style='width:{{ $withs['updated_at'] }}'>{!! trans($plang_admin.'.columns.email') !!}
+                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
+                    @if($sorting['items'][$name] == 'asc')
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    @elseif($sorting['items'][$name] == 'desc')
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    @endif
+                </a>
+            </th>
+
+            <!-- MESSAGE -->
+            <?php $name = 'contact_message' ?>
+
+            <th class="hidden-xs" style='width:{{ $withs['updated_at'] }}'>{!! trans($plang_admin.'.columns.message') !!}
+                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
+                    @if($sorting['items'][$name] == 'asc')
+                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
+                    @elseif($sorting['items'][$name] == 'desc')
+                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
+                    @else
+                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                    @endif
+                </a>
+            </th>
 
             <!-- NAME -->
             <?php $name = 'updated_at' ?>
@@ -90,9 +165,10 @@
                 <span class='lb-delete-all'>
                     {{ trans($plang_admin.'.columns.operations') }}
                 </span>
-
+                <div class="btn-del" style="display:none;" >
                 {!! Form::submit(trans($plang_admin.'.buttons.delete'), array("class"=>"btn btn-danger pull-right delete btn-delete-all del-trash", 'name'=>'del-trash')) !!}
                 {!! Form::submit(trans($plang_admin.'.buttons.delete'), array("class"=>"btn btn-warning pull-right delete btn-delete-all del-forever", 'name'=>'del-forever')) !!}
+                </div>
             </th>
 
             <!--DELETE-->
@@ -126,6 +202,20 @@
                     <i class="fa fa-circle-o red" title='{!! trans($plang_admin.".labels.unknown") !!}'></i>
                     @endif
                 </td>
+                <!--NAME-->
+                <td> {!! $item->user_id_assigner !!} </td>
+
+                <!--NAME-->
+                <td> {!! $item->contact_answer !!} </td>
+
+                <!--NAME-->
+                <td> {!! $item->contact_title !!} </td>
+
+                <!--NAME-->
+                <td> {!! $item->contact_email !!} </td>
+
+                <!--NAME-->
+                <td> {!! $item->contact_message !!} </td>
 
                 <!--UPDATED AT-->
                 <td> {!! $item->updated_at !!} </td>
@@ -163,7 +253,7 @@
                 <!--DELETE-->
                 <td>
                     <span class='box-item pull-right'>
-                        <input type="checkbox" id="<?php echo $item->id ?>" name="ids[]" value="{!! $item->id !!}">
+                        <input type="checkbox" class="ckbox" id="<?php echo $item->id ?>" name="ids[]" value="{!! $item->id !!}">
                         <label for="box-item"></label>
                     </span>
                 </td>
