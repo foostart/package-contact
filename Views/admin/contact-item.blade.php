@@ -70,34 +70,6 @@
                 </a>
             </th>
             
-            <!-- USER ID -->
-            <?php $name = 'user_id_assigner' ?>
-
-            <th class="hidden-xs" style='width:{{ $withs['updated_at'] }}'>{!! trans($plang_admin.'.columns.user_id_assigner') !!}
-                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
-                    @if($sorting['items'][$name] == 'asc')
-                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
-                    @elseif($sorting['items'][$name] == 'desc')
-                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
-                    @else
-                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
-                    @endif
-                </a>
-            </th>
-
-            <!-- ANSWER -->
-            <?php $name = 'contact_answer' ?>
-
-            <th class="hidden-xs" style='width:{{ $withs['updated_at'] }}'>{!! trans($plang_admin.'.columns.answer') !!}
-                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
-                    @if($sorting['items'][$name] == 'asc')
-                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
-                    @elseif($sorting['items'][$name] == 'desc')
-                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
-                    @else
-                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
-                    @endif
-                </a>
             </th>
 
             <!-- TITLE -->
@@ -115,35 +87,9 @@
                 </a>
             </th>
 
-            <!-- EMAIL -->
-            <?php $name = 'contact_email' ?>
+            
 
-            <th class="hidden-xs" style='width:{{ $withs['updated_at'] }}'>{!! trans($plang_admin.'.columns.email') !!}
-                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
-                    @if($sorting['items'][$name] == 'asc')
-                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
-                    @elseif($sorting['items'][$name] == 'desc')
-                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
-                    @else
-                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
-                    @endif
-                </a>
-            </th>
-
-            <!-- MESSAGE -->
-            <?php $name = 'contact_message' ?>
-
-            <th class="hidden-xs" style='width:{{ $withs['updated_at'] }}'>{!! trans($plang_admin.'.columns.message') !!}
-                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
-                    @if($sorting['items'][$name] == 'asc')
-                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
-                    @elseif($sorting['items'][$name] == 'desc')
-                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
-                    @else
-                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
-                    @endif
-                </a>
-            </th>
+            
 
             <!-- NAME -->
             <?php $name = 'updated_at' ?>
@@ -203,19 +149,19 @@
                     @endif
                 </td>
                 <!--NAME-->
-                <td> {!! $item->user_id_assigner !!} </td>
+                <!-- <td> {!! $item->user_id_assigner !!} </td> -->
 
-                <!--NAME-->
-                <td> {!! $item->contact_answer !!} </td>
+                <!--Answer-->
+                <!-- <td> {!! $item->contact_answer !!} </td> -->
 
-                <!--NAME-->
+                <!--Title-->
                 <td> {!! $item->contact_title !!} </td>
 
-                <!--NAME-->
-                <td> {!! $item->contact_email !!} </td>
+                <!--EMail-->
+                <!-- <td> {!! $item->contact_email !!} </td> -->
 
-                <!--NAME-->
-                <td> {!! $item->contact_message !!} </td>
+                <!--Message-->
+                <!-- <td> {!! $item->contact_message !!} </td> -->
 
                 <!--UPDATED AT-->
                 <td> {!! $item->updated_at !!} </td>

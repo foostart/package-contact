@@ -27,7 +27,7 @@
             'label' => trans($plang_admin.'.labels.title'),
             'value' => @$item->contact_title,
             'description' => trans($plang_admin.'.descriptions.title'),
-            'errors' => $errors,
+            
             ])
             <!--/contact title-->
 
@@ -38,7 +38,7 @@
             'value' => @$item->contact_email,
             'description' => trans($plang_admin.'.descriptions.email'),
             'tinymce' => false,
-            'errors' => $errors,
+            
             ])
             <!--/contact email-->
 
@@ -50,7 +50,7 @@
             'description' => trans($plang_admin.'.descriptions.message'),
             'rows' => 50,
             'tinymce' => true,
-            'errors' => $errors,
+            
             ])
             <!--/contact message-->
 
