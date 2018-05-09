@@ -12,18 +12,17 @@ Route::get('contact', [
 
 
 /**
- * sample
-*/
-Route::get('contacts/sample', [
-    'as' => 'contacts.sample',
-    'uses' => 'Foostart\Contact\Controllers\Admin\ContactAdminController@sample'
-]);
+             * sample
+            */
+            Route::get('admin/contacts/sample', [
+                'as' => 'contacts.sample',
+                'uses' => 'Foostart\Contact\Controllers\Admin\ContactAdminController@sample'
+            ]);
 
-Route::post('contacts/sample', [
-    'as' => 'contacts.addSample',
-    'uses' => 'Foostart\Contact\Controllers\Admin\ContactAdminController@addSample'
-]);
-
+            Route::post('admin/contacts/sample', [
+                'as' => 'contacts.sample',
+                'uses' => 'Foostart\Contact\Controllers\Admin\ContactAdminController@addSample'
+            ]);
 
 /**
  * ADMINISTRATOR

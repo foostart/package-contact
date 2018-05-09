@@ -27,7 +27,7 @@
             'label' => trans($plang_admin.'.labels.title'),
             'value' => @$item->contact_title,
             'description' => trans($plang_admin.'.descriptions.title'),
-            
+            'errors' => $errors,
             ])
             <!--/contact title-->
 
@@ -38,9 +38,19 @@
             'value' => @$item->contact_email,
             'description' => trans($plang_admin.'.descriptions.email'),
             'tinymce' => false,
-            
+            'errors' => $errors,
             ])
             <!--/contact email-->
+
+            <!--contact phone-->
+            @include('package-contact::admin.partials.input_text', [
+            'name' => 'contact_phone',
+            'label' => trans($plang_admin.'.labels.phone'),
+            'value' => @$item->contact_phone,
+            'description' => trans($plang_admin.'.descriptions.phone'),
+            'errors' => $errors,
+            ])
+            <!--/contact title-->
 
             <!--contact message-->
             @include('package-contact::admin.partials.textarea', [
@@ -50,7 +60,7 @@
             'description' => trans($plang_admin.'.descriptions.message'),
             'rows' => 50,
             'tinymce' => true,
-            
+            'errors' => $errors,
             ])
             <!--/contact message-->
 

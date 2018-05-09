@@ -44,14 +44,20 @@
                 <div class='panel-description'>
                     {!! trans($plang_admin.'.descriptions.form') !!}</h4>
                 </div>
-                           
-                
+
+                <!-- ERRORS NAME  -->
+                @if($errors->count() > 0)
+                    <div class='panel-errors'>
+                        @include('package-category::admin.partials.errors', ['errors' => $errors])
+                    </div>
+                @endif
+                <!-- /END ERROR NAME -->
 
 
                 {{-- successful message --}}
                 @if(Session::get('message'))
                     <div class='panel-success'>
-                        @include('package-contact::admin.partials.success', ['message' => Session::get('message')])
+                        @include('package-category::admin.partials.success', ['message' => Session::get('message')])
                     </div>
                 @endif
 

@@ -39,6 +39,7 @@ class Contact extends FooModel {
             'contact_title',
             'contact_email',
             'contact_message',
+            'contact_phone',
 
         ];
 
@@ -104,9 +105,13 @@ class Contact extends FooModel {
                 'name' => 'contact_message',
                 'type' => 'Text',
             ],
+            'contact_phone' => [
+                'name' => 'contact_phone',
+                'type' => 'Int',
+            ],
             
         ];
-
+        
         //check valid fields for inserting
         $this->valid_insert_fields = [
             'contact_name',
@@ -123,6 +128,9 @@ class Contact extends FooModel {
             'user_id_assigner',
             'contact_title',
             'contact_email',
+            'contact_message',
+            'contact_phone',
+
         ];
 
         //check valid fields for ordering
