@@ -20,7 +20,10 @@ use Foostart\Contact\Models\Contact;
 use Foostart\Category\Models\Category;
 use Foostart\Contact\Validators\ContactValidator;
 use Illuminate\Support\Facades\DB;
-
+use Foostart\Contact\Validators\SampleValidator;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Mail\Mailable;
 
 class ContactAdminController extends FooController {
 
@@ -38,7 +41,7 @@ class ContactAdminController extends FooController {
 
         // validators
         $this->obj_validator = new ContactValidator();
-
+        $this->obj_validator_sample = new SampleValidator();
         // set language files
         $this->plang_admin = 'contact-admin';
         $this->plang_front = 'contact-front';
@@ -58,6 +61,7 @@ class ContactAdminController extends FooController {
                 'config'  => $this->package_name.'::admin.'.$this->package_base_name.'-config',
                 'lang'  => $this->package_name.'::admin.'.$this->package_base_name.'-lang',
                 'sample'  => $this->package_name.'::admin.'.$this->package_base_name.'-sample',
+                'mail'  => $this->package_name.'::admin.'.$this->package_base_name.'-mail',
             ]
         ];
 

@@ -12,24 +12,25 @@ Route::get('contact', [
 
 
 /**
-             * sample
-            */
-            Route::get('admin/contacts/sample', [
-                'as' => 'contacts.sample',
-                'uses' => 'Foostart\Contact\Controllers\Admin\ContactAdminController@sample'
-            ]);
-
-            Route::post('admin/contacts/sample', [
-                'as' => 'contacts.sample',
-                'uses' => 'Foostart\Contact\Controllers\Admin\ContactAdminController@addSample'
-            ]);
-
-/**
  * ADMINISTRATOR
  */
 Route::group(['middleware' => ['web']], function () {
-
-    Route::group(['middleware' => ['admin_logged', 'can_see', ],
+    /**
+     * sample
+    */
+    Route::get('contacts/sample', [
+        'as' => 'contacts.sample',
+        'uses' => 'Foostart\Contact\Controllers\Admin\ContactAdminController@sample'
+    ]);
+    Route::post('contacts/sample', [
+        'as' => 'contacts.sample',
+        'uses' => 'Foostart\Contact\Controllers\Admin\ContactAdminController@addSample'
+    ]);
+    Route::get('contacts/mail', [
+        'as' => 'contacts.sample',
+        'uses' => 'Foostart\Contact\Controllers\Admin\MailController@send'
+    ]);
+    Route::group(['middleware' => ['admin_logged', 'can_see', 'in_context'],
                   'namespace' => 'Foostart\Contact\Controllers\Admin',
         ], function () {
 
@@ -37,7 +38,7 @@ Route::group(['middleware' => ['web']], function () {
           |-----------------------------------------------------------------------
           | Manage contact
           |-----------------------------------------------------------------------
-          | 1. List of contacts
+          | 1. List of contact
           | 2. Edit contact
           | 3. Delete contact
           | 4. Add new contact
