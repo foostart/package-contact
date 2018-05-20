@@ -15,6 +15,10 @@ return [
             'min' => 255,
             'max' => 0,//unlimit
         ],
+        'contact_status' => [
+            'min' => 255,
+            'max' => 0,//unlimit
+        ],
         'contact_title' => [
             'min' => 10,
             'max' => 255,

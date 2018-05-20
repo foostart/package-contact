@@ -9,7 +9,15 @@ Route::get('contact', [
     'as' => 'contact',
     'uses' => 'Foostart\Contact\Controllers\Front\ContactFrontController@index'
 ]);
+Route::get('contacts/lien-he', [
+    'as' => 'contacts.home',
+    'uses' => 'Foostart\Contact\Controllers\Front\ContactController@index'
+]); 
 
+Route::post('contacts/lien-he', [
+    'as' => 'contacts.home',
+    'uses' => 'Foostart\Contact\Controllers\Front\ContactController@create'
+]); 
 
 /**
  * ADMINISTRATOR
@@ -26,10 +34,10 @@ Route::group(['middleware' => ['web']], function () {
         'as' => 'contacts.sample',
         'uses' => 'Foostart\Contact\Controllers\Admin\ContactAdminController@addSample'
     ]);
-    Route::get('contacts/mail', [
-        'as' => 'contacts.sample',
-        'uses' => 'Foostart\Contact\Controllers\Admin\MailController@send'
-    ]);
+   
+
+
+
     Route::group(['middleware' => ['admin_logged', 'can_see', 'in_context'],
                   'namespace' => 'Foostart\Contact\Controllers\Admin',
         ], function () {

@@ -41,7 +41,7 @@ class ContactAdminController extends FooController {
 
         // validators
         $this->obj_validator = new ContactValidator();
-        $this->obj_validator_sample = new SampleValidator();
+        //$this->obj_validator_sample = new SampleValidator();
         // set language files
         $this->plang_admin = 'contact-admin';
         $this->plang_front = 'contact-front';
@@ -488,16 +488,34 @@ class ContactAdminController extends FooController {
 
 
         $id = (int) $request->get('id');
-
-      
-
-
-            // add new item
-            
-                $item = $this->obj_item->insertSample($params);
-
-                return redirect()->back();
+        $is_valid_request = $this->isValidRequest($request);
+        //var_dump($this->page_views['admin']);die();
         
+        
+        //if ($is_valid_request && $this->obj_validator->validate($params)) {// valid data
+        // add new item
+            $item = $this->obj_item->insertSample($params);
+           
+            if (!empty($item)) {
+
+                    //message
+                    return Redirect::route($this->root_router.'.sample', ["id" => $item->id])
+                                    ->withMessage(trans($this->plang_admin.'.actions.add-ok'));
+                } else {
+
+                    //message
+                    return Redirect::route($this->root_router.'.sample', ["id" => $item->id])
+                                    ->withMessage(trans($this->plang_admin.'.actions.add-error'));
+                
+                }
+                    // } else { // invalid data
+
+                    //     $errors = $this->obj_validator->getErrors();
+            
+                    //     // passing the id incase fails editing an already existing item
+                    //     return Redirect::route($this->root_router.'.edit', $id ? ["id" => $id]: [])
+                    //             ->withInput()->withErrors($errors);
+                    // }
     }
 
 
