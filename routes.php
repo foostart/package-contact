@@ -3,21 +3,18 @@
 use Illuminate\Session\TokenMismatchException;
 
 /**
- * FRONT
+ * USER
  */
-Route::get('contact', [
-    'as' => 'contact',
-    'uses' => 'Foostart\Contact\Controllers\Front\ContactFrontController@index'
-]);
-Route::get('contacts/lien-he', [
-    'as' => 'contacts.home',
-    'uses' => 'Foostart\Contact\Controllers\Front\ContactController@index'
-]); 
+Route::group(['middleware' => ['web', ], 'namespace' => 'Foostart\Contact\Controllers\User', ], function () {
+    /**
+    * list
+    */
+   Route::post('contact', [
+       'as' => 'usercontact.post',
+       'uses' => 'ContactUserController@post'
+   ]);
+});
 
-Route::post('contacts/lien-he', [
-    'as' => 'contacts.home',
-    'uses' => 'Foostart\Contact\Controllers\Front\ContactController@create'
-]); 
 
 /**
  * ADMINISTRATOR
@@ -34,7 +31,7 @@ Route::group(['middleware' => ['web']], function () {
         'as' => 'contacts.sample',
         'uses' => 'Foostart\Contact\Controllers\Admin\ContactAdminController@addSample'
     ]);
-   
+
 
 
 
@@ -58,6 +55,10 @@ Route::group(['middleware' => ['web']], function () {
         /**
          * list
          */
+        Route::get('admin/contacts', [
+            'as' => 'contacts',
+            'uses' => 'ContactAdminController@index'
+        ]);
         Route::get('admin/contacts/list', [
             'as' => 'contacts.list',
             'uses' => 'ContactAdminController@index'
@@ -137,7 +138,7 @@ Route::group(['middleware' => ['web']], function () {
                 'uses' => 'ContactAdminController@search'
         ]);
 
-        
+
 
     });
 });

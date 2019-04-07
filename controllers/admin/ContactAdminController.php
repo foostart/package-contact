@@ -257,7 +257,12 @@ class ContactAdminController extends FooController {
         $config_path = realpath(base_path('config/package-contact.php'));
         $package_path = realpath(base_path('vendor/foostart/package-contact'));
 
-        $config_bakup = realpath($package_path.'/storage/backup/config');
+        $config_bakup = $package_path.'/storage/backup/config';
+        if (!file_exists($config_bakup)) {
+            mkdir($config_bakup, 0755    , true);
+        }
+        $config_bakup = realpath($config_bakup);
+
 
         if ($version = $request->get('v')) {
             //load backup config
@@ -300,14 +305,19 @@ class ContactAdminController extends FooController {
         // display view
         $langs = config('package-contact.langs');
         $lang_paths = [];
+        $package_path = realpath(base_path('vendor/foostart/package-contact'));
 
         if (!empty($langs) && is_array($langs)) {
             foreach ($langs as $key => $value) {
                 $lang_paths[$key] = realpath(base_path('resources/lang/'.$key.'/contact-admin.php'));
+
+                $key_backup = $package_path.'/storage/backup/lang/'.$key;
+
+                if (!file_exists($key_backup)) {
+                    mkdir($key_backup, 0755    , true);
+                }
             }
         }
-
-        $package_path = realpath(base_path('vendor/foostart/package-contact'));
 
         $lang_bakup = realpath($package_path.'/storage/backup/lang');
         $lang = $request->get('lang')?$request->get('lang'):'en';
@@ -421,7 +431,7 @@ class ContactAdminController extends FooController {
             $data = DB::table('user_profile')
                 ->where('last_name', 'like', '%'.$query.'%')
                 ->orWhere('first_name', 'like', '%'.$query.'%')
-                ->get();    
+                ->get();
             }
             $total_row = $data->count();
             if($total_row > 0)
@@ -448,11 +458,11 @@ class ContactAdminController extends FooController {
                 'table_data'  => $output,
                 'total_data'  => $total_row
                );
-         
+
             echo json_encode($data);
-                
-        }  
-    } 
+
+        }
+    }
 
     /**
      * Show sample
@@ -460,7 +470,7 @@ class ContactAdminController extends FooController {
      * @date 24/04/2018
      */
     public function sample(Request $request) {
-        
+
         $item = NULL;
         $categories = NULL;
 
@@ -483,19 +493,19 @@ class ContactAdminController extends FooController {
     public function addSample(Request $request) {
 
         $item = NULL;
-       
+
         $params = $request->all();
 
 
         $id = (int) $request->get('id');
         $is_valid_request = $this->isValidRequest($request);
         //var_dump($this->page_views['admin']);die();
-        
-        
+
+
         //if ($is_valid_request && $this->obj_validator->validate($params)) {// valid data
         // add new item
             $item = $this->obj_item->insertSample($params);
-           
+
             if (!empty($item)) {
 
                     //message
@@ -506,12 +516,12 @@ class ContactAdminController extends FooController {
                     //message
                     return Redirect::route($this->root_router.'.sample', ["id" => $item->id])
                                     ->withMessage(trans($this->plang_admin.'.actions.add-error'));
-                
+
                 }
                     // } else { // invalid data
 
                     //     $errors = $this->obj_validator->getErrors();
-            
+
                     //     // passing the id incase fails editing an already existing item
                     //     return Redirect::route($this->root_router.'.edit', $id ? ["id" => $id]: [])
                     //             ->withInput()->withErrors($errors);

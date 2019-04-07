@@ -97,4 +97,25 @@ class ContactValidator extends FooValidator
         return $configs;
     }
 
+        /**
+     *
+     * @param ARRAY $input
+     * @return BOOLEAN
+     */
+    public function userValidate($input) {
+        //set rules
+        self::$rules = [
+            'contact_name' => ["required"],
+            'contact_email' => ["required", "email"],
+            'contact_title' => ["required"],
+            'contact_message' => ["required"],
+        ];
+
+        //validate
+        $flag = parent::validate($input);
+        $this->errors = $this->errors ? $this->errors : new MessageBag();
+
+        return $flag;
+    }
+
 }
