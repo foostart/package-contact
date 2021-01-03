@@ -47,6 +47,22 @@ class ContactUserController extends FooController {
 
     }
 
+    public function contact(Request $request) {
+        return view('package-contact::front.test');
+    }
+    public function addContact(Request $request) {
+        $contact = new Contact();
+        $name = $request->name;
+        $overview = $request->overview;
+        $des = $request->des;
+        
+        $contact['contact_name'] = $name;
+        $contact['contact_overview'] = $overview;
+        $contact['contact_description'] = $des;
+        $contact['contact_status'] = 99;
+        $contact->save();
+        echo 'Xong';
+    }
 
     /**
      * Processing data from POST method: add new item, edit existing item

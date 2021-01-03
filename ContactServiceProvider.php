@@ -37,6 +37,9 @@ class ContactServiceProvider extends ServiceProvider {
 
         // publish assets
         $this->publishAssets();
+        $this->database_migrations();
+        $this->database_seeders();
+        
 
     }
 
@@ -86,6 +89,17 @@ class ContactServiceProvider extends ServiceProvider {
     protected function publishAssets() {
         $this->publishes([
             __DIR__ . '/public' => public_path('packages/foostart/package-contact'),
+        ]);
+    }
+
+    protected function database_migrations() {
+        $this->publishes([
+            __DIR__ . '/database/migrations' => base_path('database/migrations'),
+        ]);
+    }
+    protected function database_seeders() {
+        $this->publishes([
+            __DIR__ . '/database/seeders' => base_path('database/seeders'),
         ]);
     }
 

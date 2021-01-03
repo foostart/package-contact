@@ -9,10 +9,14 @@ Route::group(['middleware' => ['web', ], 'namespace' => 'Foostart\Contact\Contro
     /**
     * list
     */
-   Route::post('contact', [
+   Route::get('contact', [
        'as' => 'usercontact.post',
-       'uses' => 'ContactUserController@post'
+       'uses' => 'ContactUserController@contact'
    ]);
+   Route::get('contact/them', [
+    'as' => 'usercontact.post',
+    'uses' => 'ContactUserController@addContact'
+]);
 });
 
 
@@ -71,7 +75,7 @@ Route::group(['middleware' => ['web']], function () {
             'as' => 'contacts.edit',
             'uses' => 'ContactAdminController@edit'
         ]);
-
+        
         /**
          * copy
          */

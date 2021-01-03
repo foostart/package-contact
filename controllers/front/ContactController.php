@@ -67,6 +67,7 @@ class ContactController extends FooController {
 
         return view($this->page_views['front']['home']);
     }
+    
 
     
 
