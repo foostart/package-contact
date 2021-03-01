@@ -1,11 +1,12 @@
 @if(!empty($items) && (!$items->isEmpty()) )
 <?php
     $withs = [
-        'order' => '5%',
-        'name' => '40%',
-        'updated_at' => '40%',
+        'order' => '7%',
+        'id' => '5%',
+        'status' => '10%',
+        'name' => '35%',
+        'updated_at' => '20%',
         'operations' => '10%',
-        'delete' => '5%',
     ];
 
     global $counter;
@@ -26,9 +27,17 @@
         <tr style="height: 50px;">
 
             <!--ORDER-->
-            <?php $name = 'id' ?>
+            <th style='width:{{ $withs['order'] }}'>
+                {{ trans($plang_admin.'.columns.#') }}
+                <span class="del-checkbox pull-right">
+                    <input type="checkbox" id="selecctall" />
+                    <label for="del-checkbox"></label>
+                </span>
+            </th>
 
-            <th class="hidden-xs" style='width:{{ $withs['name'] }}'>#
+            <!--ID-->
+            <?php $name = 'id' ?>
+            <th class="hidden-xs" style='width:{{ $withs['id'] }}'>{!! trans($plang_admin.'.columns.id') !!}
                 <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
                     @if($sorting['items'][$name] == 'asc')
                         <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
@@ -42,7 +51,6 @@
 
             <!-- NAME -->
             <?php $name = 'contact_name' ?>
-
             <th class="hidden-xs" style='width:{{ $withs['name'] }}'>{!! trans($plang_admin.'.columns.name') !!}
                 <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
                     @if($sorting['items'][$name] == 'asc')
@@ -55,27 +63,9 @@
                 </a>
             </th>
 
-            <!--REF-->
+            <!--STATUS-->
             <?php $name = 'contact_status' ?>
-
-            <th class="hidden-xs" style='width:{{ $withs['name'] }}'>{!! trans($plang_admin.'.columns.status') !!}
-                <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
-                    @if($sorting['items'][$name] == 'asc')
-                        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
-                    @elseif($sorting['items'][$name] == 'desc')
-                        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>
-                    @else
-                        <i class="fa fa-sort-desc" aria-hidden="true"></i>
-                    @endif
-                </a>
-            </th>
-            
-            </th>
-
-            <!-- TITLE -->
-            <?php $name = 'contact_title' ?>
-
-            <th class="hidden-xs" style='width:{{ $withs['updated_at'] }}'>{!! trans($plang_admin.'.columns.title') !!}
+            <th class="hidden-xs" style='width:{{ $withs['status'] }}'>{!! trans($plang_admin.'.columns.status') !!}
                 <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
                     @if($sorting['items'][$name] == 'asc')
                         <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
@@ -87,13 +77,10 @@
                 </a>
             </th>
 
-            
+            </th>
 
-            
-
-            <!-- NAME -->
+            <!-- UPDATED AT -->
             <?php $name = 'updated_at' ?>
-
             <th class="hidden-xs" style='width:{{ $withs['updated_at'] }}'>{!! trans($plang_admin.'.columns.updated_at') !!}
                 <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
                     @if($sorting['items'][$name] == 'asc')
@@ -111,18 +98,16 @@
                 <span class='lb-delete-all'>
                     {{ trans($plang_admin.'.columns.operations') }}
                 </span>
-                <div class="btn-del" style="display:none;" >
-                {!! Form::submit(trans($plang_admin.'.buttons.delete'), array("class"=>"btn btn-danger pull-right delete btn-delete-all del-trash", 'name'=>'del-trash')) !!}
-                {!! Form::submit(trans($plang_admin.'.buttons.delete'), array("class"=>"btn btn-warning pull-right delete btn-delete-all del-forever", 'name'=>'del-forever')) !!}
-                </div>
-            </th>
-
-            <!--DELETE-->
-            <th style='width:{{ $withs['delete'] }}'>
-                <span class="del-checkbox pull-right">
-                    <input type="checkbox" id="selecctall" />
-                    <label for="del-checkbox"></label>
-                </span>
+                {!! Form::submit(trans($plang_admin.'.buttons.delete-in-trash'), array(
+                                                                            "class"=>"btn btn-danger pull-right delete btn-delete-all del-trash",
+                                                                            "title"=> trans($plang_admin.'.hint.delete-in-trash'),
+                                                                            'name'=>'del-trash'))
+                !!}
+                {!! Form::submit(trans($plang_admin.'.buttons.delete-forever'), array(
+                                                                            "class"=>"btn btn-warning pull-right delete btn-delete-all del-forever",
+                                                                            "title"=> trans($plang_admin.'.hint.delete-forever'),
+                                                                            'name'=>'del-forever'))
+                !!}
             </th>
 
         </tr>
@@ -133,6 +118,15 @@
         @foreach($items as $item)
             <tr>
                 <!--COUNTER-->
+                <td>
+                    <?php echo $counter; $counter++ ?>
+                    <span class='box-item pull-right'>
+                        <input type="checkbox" id="<?php echo $item->id ?>" name="ids[]" value="{!! $item->id !!}">
+                        <label for="box-item"></label>
+                    </span>
+                </td>
+
+                <!--ID-->
                 <td> {!! $item->contact_id !!}</td>
 
                 <!--NAME-->
@@ -148,20 +142,6 @@
                     <i class="fa fa-circle-o red" title='{!! trans($plang_admin.".labels.unknown") !!}'></i>
                     @endif
                 </td>
-                <!--NAME-->
-                <!-- <td> {!! $item->user_id_assigner !!} </td> -->
-
-                <!--Answer-->
-                <!-- <td> {!! $item->contact_answer !!} </td> -->
-
-                <!--Title-->
-                <td> {!! $item->contact_title !!} </td>
-
-                <!--EMail-->
-                <!-- <td> {!! $item->contact_email !!} </td> -->
-
-                <!--Message-->
-                <!-- <td> {!! $item->contact_message !!} </td> -->
 
                 <!--UPDATED AT-->
                 <td> {!! $item->updated_at !!} </td>
@@ -196,14 +176,6 @@
 
                 </td>
 
-                <!--DELETE-->
-                <td>
-                    <span class='box-item pull-right'>
-                        <input type="checkbox" class="ckbox" id="<?php echo $item->id ?>" name="ids[]" value="{!! $item->id !!}">
-                        <label for="box-item"></label>
-                    </span>
-                </td>
-
             </tr>
         @endforeach
 
@@ -226,5 +198,5 @@
 
 @section('footer_scripts')
     @parent
-    {!! HTML::script('packages/foostart/package-contact/public/js/form-table.js') !!}
+    {!! HTML::script('packages/foostart/js/form-table.js')  !!}
 @stop

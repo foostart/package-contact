@@ -47,7 +47,9 @@ return [
     |
     */
     'columns' => [
-        'order' => '#',
+        'order' => 'Order',
+        '#' => '#',
+        'id' => 'Id',
         'name' => 'Contact name',
         'operations' => 'Operations',
         'updated_at' => 'Updated at',
@@ -95,6 +97,8 @@ return [
         'add' => 'Add',
         'save' => 'Save',
         'delete' => 'Delete',
+        'delete-in-trash' => 'In trash',
+        'delete-forever' => 'Forever',
     ],
 
 
@@ -182,14 +186,14 @@ return [
     'fields' => [
         'id' => 'Contact ID',
         'name' => 'Contact name',
-        'description' => 'Contact Description',
-        'overview' => 'Contact Overview',
+        'description' => 'Contact description',
+        'overview' => 'Contact overview',
         'slug' => 'Slug',
         'updated_at' => 'Updated at',
         'user-id'   => 'ID',
         'last-name' => 'Last name',
         'first-name'    => 'First name',
-        'contact-status' => 'Contact Status',
+        'contact_status' => 'status',
     ],
 
 

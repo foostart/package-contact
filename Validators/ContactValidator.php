@@ -39,7 +39,7 @@ class ContactValidator extends FooValidator
                 'contact_name.required'          => trans($this->lang_admin.'.errors.required', ['attribute' => trans($this->lang_admin.'.fields.name')]),
                 'contact_overview.required'      => trans($this->lang_admin.'.errors.required', ['attribute' => trans($this->lang_admin.'.fields.overview')]),
                 'contact_description.required'   => trans($this->lang_admin.'.errors.required', ['attribute' => trans($this->lang_admin.'.fields.description')]),
-                'contact_status.required'        => trans($this->lang_admin.'.errors.required', ['attribute' => trans($this->lang_admin.'.fields.updated_at')]),
+                'contact_status.required'        => trans($this->lang_admin.'.errors.required', ['attribute' => trans($this->lang_admin.'.fields.status')]),
                 ];
         });
 
@@ -95,6 +95,27 @@ class ContactValidator extends FooValidator
 
         $configs = config('package-contact');
         return $configs;
+    }
+
+        /**
+     *
+     * @param ARRAY $input
+     * @return BOOLEAN
+     */
+    public function userValidate($input) {
+        //set rules
+        self::$rules = [
+            'contact_name' => ["required"],
+            'contact_email' => ["required", "email"],
+            'contact_title' => ["required"],
+            'contact_message' => ["required"],
+        ];
+
+        //validate
+        $flag = parent::validate($input);
+        $this->errors = $this->errors ? $this->errors : new MessageBag();
+
+        return $flag;
     }
 
 }
