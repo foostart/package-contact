@@ -17,9 +17,7 @@ class ContactValidator extends FooValidator
         // add rules
         self::$rules = [
             'contact_name' => ["required"],
-            'contact_overview' => ["required"],
             'contact_description' => ["required"],
-            'contact_status'       => ["required"],
         ];
 
         // set configs
@@ -37,9 +35,7 @@ class ContactValidator extends FooValidator
         {
             self::$messages = [
                 'contact_name.required'          => trans($this->lang_admin.'.errors.required', ['attribute' => trans($this->lang_admin.'.fields.name')]),
-                'contact_overview.required'      => trans($this->lang_admin.'.errors.required', ['attribute' => trans($this->lang_admin.'.fields.overview')]),
                 'contact_description.required'   => trans($this->lang_admin.'.errors.required', ['attribute' => trans($this->lang_admin.'.fields.description')]),
-                'contact_status.required'        => trans($this->lang_admin.'.errors.required', ['attribute' => trans($this->lang_admin.'.fields.status')]),
                 ];
         });
 
@@ -66,12 +62,6 @@ class ContactValidator extends FooValidator
                 'min' => $_ln['contact_name']['min'],
                 'max' => $_ln['contact_name']['max'],
             ],
-            'overview' => [
-                'key' => 'contact_overview',
-                'label' => trans($this->lang_admin.'.fields.overview'),
-                'min' => $_ln['contact_overview']['min'],
-                'max' => $_ln['contact_overview']['max'],
-            ],
             'description' => [
                 'key' => 'contact_description',
                 'label' => trans($this->lang_admin.'.fields.description'),
@@ -81,7 +71,6 @@ class ContactValidator extends FooValidator
         ];
 
         $flag = $this->isValidLength($input['contact_name'], $params['name']) ? $flag : FALSE;
-        $flag = $this->isValidLength($input['contact_overview'], $params['overview']) ? $flag : FALSE;
         $flag = $this->isValidLength($input['contact_description'], $params['description']) ? $flag : FALSE;
         return $flag;
     }

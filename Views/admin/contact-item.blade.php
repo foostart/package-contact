@@ -1,10 +1,10 @@
 @if(!empty($items) && (!$items->isEmpty()) )
 <?php
     $withs = [
-        'order' => '7%',
-        'id' => '5%',
-        'status' => '10%',
-        'name' => '35%',
+        'counter' => '10%',
+        'id' => '10%',        
+        'title' => '20%',
+        'status' => '15%',
         'updated_at' => '20%',
         'operations' => '10%',
     ];
@@ -26,9 +26,9 @@
     <thead>
         <tr style="height: 50px;">
 
-            <!--ORDER-->
-            <th style='width:{{ $withs['order'] }}'>
-                {{ trans($plang_admin.'.columns.#') }}
+            <!--COUNTER-->
+            <th style='width:{{ $withs['counter'] }}'>
+                {{ trans($plang_admin.'.columns.counter') }}
                 <span class="del-checkbox pull-right">
                     <input type="checkbox" id="selecctall" />
                     <label for="del-checkbox"></label>
@@ -49,9 +49,9 @@
                 </a>
             </th>
 
-            <!-- NAME -->
-            <?php $name = 'contact_name' ?>
-            <th class="hidden-xs" style='width:{{ $withs['name'] }}'>{!! trans($plang_admin.'.columns.name') !!}
+            <!--TITLE-->
+            <?php $name = 'contact_title' ?>
+            <th class="hidden-xs" style='width:{{ $withs['title'] }}'>{!! trans($plang_admin.'.columns.title') !!}
                 <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
                     @if($sorting['items'][$name] == 'asc')
                         <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
@@ -64,8 +64,8 @@
             </th>
 
             <!--STATUS-->
-            <?php $name = 'contact_status' ?>
-            <th class="hidden-xs" style='width:{{ $withs['status'] }}'>{!! trans($plang_admin.'.columns.status') !!}
+            <?php $name = 'status' ?>
+            <th class="hidden-xs text-center" style='width:{{ $withs['status'] }}'>{!! trans($plang_admin.'.columns.status') !!}
                 <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
                     @if($sorting['items'][$name] == 'asc')
                         <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
@@ -134,10 +134,8 @@
 
                 <!--STATUS-->
                 <td style="text-align: center;">
-
-                    <?php $status = config('package-contact.status'); ?>
-                    @if($item->contact_status && (isset($status['list'][$item->contact_status])))
-                        <i class="fa fa-circle" style="color:{!! $status['color'][$item->contact_status] !!}" title='{!! $status["list"][$item->contact_status] !!}'></i>
+                    @if($item->status && (isset($config_status['list'][$item->status])))
+                        <i class="fa fa-circle" style="color:{!! $config_status['color'][$item->status] !!}" title='{!! $config_status["list"][$item->status] !!}'></i>
                     @else
                     <i class="fa fa-circle-o red" title='{!! trans($plang_admin.".labels.unknown") !!}'></i>
                     @endif

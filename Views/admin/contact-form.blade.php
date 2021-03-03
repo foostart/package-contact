@@ -29,34 +29,6 @@
                 {!! trans($plang_admin.'.tabs.menu-1') !!}
             </a>
         </li>
-
-        <!--MENU 2-->
-        <li>
-            <a data-toggle="tab" href="#menu_2">
-                {!! trans($plang_admin.'.tabs.menu-2') !!}
-            </a>
-        </li>
-
-        <!--MENU 3-->
-        <li>
-            <a data-toggle="tab" href="#menu_3">
-                {!! trans($plang_admin.'.tabs.menu-3') !!}
-            </a>
-        </li>
-
-        <!--MENU 4-->
-        <li>
-            <a data-toggle="tab" href="#menu_4">
-                {!! trans($plang_admin.'.tabs.menu-4') !!}
-            </a>
-        </li>
-
-        <!--MENU 5-->
-        <li>
-            <a data-toggle="tab" href="#menu_5">
-                {!! trans($plang_admin.'.tabs.menu-5') !!}
-            </a>
-        </li>
     </ul>
     <!--/TAB MENU-->
 
@@ -66,112 +38,74 @@
         <!--MENU 1-->
         <div id="menu_1" class="tab-pane fade in active">
 
-            <!--contact NAME-->
+            <!--TITLE-->
             @include('package-category::admin.partials.input_text', [
-            'name' => 'contact_name',
-            'label' => trans($plang_admin.'.labels.name'),
-            'value' => @$item->contact_name,
-            'description' => trans($plang_admin.'.descriptions.name'),
-            'errors' => $errors,
-            ])
-            <!--/contact NAME-->
-
-            <!-- LIST OF CATEGORIES -->
-            @include('package-category::admin.partials.select_single', [
-            'name' => 'category_id',
-            'label' => trans($plang_admin.'.labels.category'),
-            'items' => $categories,
-            'value' => @$itemds->category_id,
-            'description' => trans($plang_admin.'.descriptions.category', [
-                                'href' => URL::route('categories.list', ['_key' => $context->context_key])
-                                ]),
-            'errors' => $errors,
-            ])
-            <!-- /LIST OF CATEGORIES -->
-
-            <!--STATUS-->
-            @include('package-category::admin.partials.radio', [
-                'name' => 'contact_status',
-                'label' => trans($plang_admin.'.labels.contact-status'),
-                'value' => @$item->contact_status,
-                'description' => trans($plang_admin.'.descriptions.contact-status'),
-                'items' => $statuses
-            ])
-        </div>
-
-        <!--MENU 2-->
-        <div id="menu_2" class="tab-pane fade">
-            <!--contact OVERVIEW-->
-            @include('package-category::admin.partials.textarea', [
-            'name' => 'contact_overview',
-            'label' => trans($plang_admin.'.labels.overview'),
-            'value' => @$item->contact_overview,
-            'description' => trans($plang_admin.'.descriptions.overview'),
-            'tinymce' => false,
-            'errors' => $errors,
-            ])
-            <!--/contact OVERVIEW-->
-
-            <!--contact DESCRIPTION-->
-            @include('package-category::admin.partials.textarea', [
-            'name' => 'contact_description',
-            'label' => trans($plang_admin.'.labels.description'),
-            'value' => @$item->contact_description,
-            'description' => trans($plang_admin.'.descriptions.description'),
-            'rows' => 50,
-            'tinymce' => true,
-            'errors' => $errors,
-            ])
-            <!--/contact DESCRIPTION-->
-        </div>
-
-        <!--MENU 3-->
-        <div id="menu_3" class="tab-pane fade">
-            <!--contact IMAGE-->
-            @include('package-category::admin.partials.input_image', [
-            'name' => 'contact_image',
-            'label' => trans($plang_admin.'.labels.image'),
-            'value' => @$item->contact_image,
-            'description' => trans($plang_admin.'.descriptions.image'),
-            'errors' => $errors,
-            ])
-            <!--/contact IMAGE-->
-
-            <!--contact FILES-->
-            @include('package-category::admin.partials.input_files', [
-                'name' => 'files',
-                'label' => trans($plang_admin.'.labels.files'),
-                'value' => @$item->contact_files,
-                'description' => trans($plang_admin.'.descriptions.files'),
+                'name' => 'contact_title',
+                'label' => trans($plang_admin.'.labels.title'),
+                'value' => @$item->contact_title,
+                'description' => trans($plang_admin.'.descriptions.title'),
                 'errors' => $errors,
             ])
-            <!--/contact FILES-->
-        </div>
-
-        <!--MENU 4-->
-        <div id="menu_4" class="tab-pane fade in active">
-
-            <!--contact SEARCH-->
-            @include('package-contact::admin.partials.search')
-            <!--/contact SEARCH-->
-
+            <!--/TITLE-->
+            <div class="row">
+                <div class='col-md-6'>
+                    <!--NAME-->
+                    @include('package-category::admin.partials.input_text', [
+                        'name' => 'contact_name',
+                        'label' => trans($plang_admin.'.labels.name'),
+                        'value' => @$item->contact_name,
+                        'description' => trans($plang_admin.'.descriptions.name'),
+                        'errors' => $errors,
+                    ])
+                    <!-- /NAME-->
+                </div>
+                
+                <div class='col-md-6'>
+                    <!--EMAIL-->
+                    @include('package-category::admin.partials.input_text', [
+                        'name' => 'contact_email',
+                        'label' => trans($plang_admin.'.labels.email'),
+                        'value' => @$item->contact_email,
+                        'description' => trans($plang_admin.'.descriptions.email'),
+                        'errors' => $errors,
+                    ])
+                    <!-- /EMAIL-->
+                </div>
+                
+                <div class='col-md-6'>
+                    <!--PHONE-->
+                    @include('package-category::admin.partials.input_text', [
+                        'name' => 'contact_phone',
+                        'label' => trans($plang_admin.'.labels.phone'),
+                        'value' => @$item->contact_phone,
+                        'description' => trans($plang_admin.'.descriptions.contact-phone'),
+                    ])
+                </div>
+                
+                <div class="col-md-6">
+                    <!--STATUS-->
+                    @include('package-category::admin.partials.select_single', [
+                        'name' => 'status',
+                        'label' => trans($plang_admin.'.form.status'),
+                        'value' => @$item->status,
+                        'items' => $status,
+                        'description' => trans($plang_admin.'.descriptions.status'),
+                    ])
+                    <!--/STATUS-->
+                </div>
+            </div>
             
-        </div>
-
-        <!--MENU 5-->
-        <div id="menu_5" class="tab-pane fade">
-
-            <!--contact DESCRIPTION-->
+             <!--DESCRIPTION-->
             @include('package-category::admin.partials.textarea', [
-            'name' => 'contact_answer',
-            'label' => trans($plang_admin.'.labels.answer'),
-            'value' => @$item->contact_answer,
-            'description' => trans($plang_admin.'.descriptions.answer'),
-            'rows' => 50,
-            'tinymce' => true,
-            'errors' => $errors,
+                'name' => 'contact_description',
+                'label' => trans($plang_admin.'.labels.description'),
+                'value' => @$item->contact_description,
+                'description' => trans($plang_admin.'.descriptions.description'),
+                'rows' => 25,
+                'tinymce' => true,
+                'errors' => $errors,
             ])
-            <!--/contact DESCRIPTION-->
+            <!--/DESCRIPTION-->
         </div>
 
     </div>

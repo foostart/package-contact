@@ -23,115 +23,47 @@ class Contact extends FooModel {
         $this->table = 'contacts';
 
         //list of field in table
-        $this->fillable = [
+        $this->fillable = array_merge($this->fillable, [
             'contact_name',
-            'category_id',
-            'user_id',
-            'user_full_name',
-            'user_email',
-            'contact_overview',
-            'contact_description',
-            'contact_image',
-            'contact_files',
-            'contact_status',
-            'user_id_assigner',
-            'contact_answer',
-            'contact_title',
             'contact_email',
-            'contact_message',
             'contact_phone',
+            'contact_title',
+            'contact_description',
 
-        ];
+        ]);
 
         //list of fields for inserting
-        $this->fields = [
+        $this->fields = array_merge($this->fields, [
             'contact_name' => [
                 'name' => 'contact_name',
                 'type' => 'Text',
             ],
-            'category_id' => [
-                'name' => 'category_id',
-                'type' => 'Int',
-            ],
-            'user_id' => [
-                'name' => 'user_id',
-                'type' => 'Int',
-            ],
-            'user_full_name' => [
-                'name' => 'user_full_name',
+             'contact_email' => [
+                'name' => 'contact_email',
                 'type' => 'Text',
             ],
-            'user_email' => [
-                'name' => 'email',
-                'type' => 'Text',
-            ],
-            'contact_overview' => [
-                'name' => 'contact_overview',
+            'contact_phone' => [
+                'name' => 'contact_phone',
                 'type' => 'Text',
             ],
             'contact_description' => [
                 'name' => 'contact_description',
                 'type' => 'Text',
             ],
-            'contact_image' => [
-                'name' => 'contact_image',
-                'type' => 'Text',
-            ],
-            'contact_files' => [
-                'name' => 'files',
-                'type' => 'Json',
-            ],
-            'contact_status' => [
-                'name' => 'contact_status',
-                'type' => 'Int',
-            ],
-            'user_id_assigner' => [
-                'name' => 'user_id_assigner',
-                'type' => 'Json',
-            ],
-            'contact_answer' => [
-                'name' => 'contact_answer',
-                'type' => 'Text',
-            ],
             'contact_title' => [
                 'name' => 'contact_title',
                 'type' => 'Text',
             ],
-            'contact_email' => [
-                'name' => 'contact_email',
-                'type' => 'Text',
-            ],
-            'contact_message' => [
-                'name' => 'contact_message',
-                'type' => 'Text',
-            ],
-            'contact_phone' => [
-                'name' => 'contact_phone',
-                'type' => 'Int',
-            ],
-            
-        ];
+        ]);
         
         //check valid fields for inserting
-        $this->valid_insert_fields = [
-            'contact_name',
-            'user_id',
-            'category_id',
-            'user_full_name',
-            'updated_at',
-            'contact_overview',
-            'contact_description',
-            'contact_image',
-            'contact_files',
-            'contact_answer',
-            'contact_status',
-            'user_id_assigner',
+        $this->valid_insert_fields = array_merge($this->valid_insert_fields, [            
             'contact_title',
             'contact_email',
-            'contact_message',
             'contact_phone',
-
-        ];
+            'contact_name',
+            'contact_description',
+        ]);
 
         //check valid fields for ordering
         $this->valid_ordering_fields = [
@@ -148,12 +80,6 @@ class Contact extends FooModel {
 
         //primary key
         $this->primaryKey = 'contact_id';
-
-        //the number of items on page
-        $this->perPage = 10;
-
-        //item status
-        $this->field_status = 'contact_status';
 
     }
 
@@ -241,6 +167,21 @@ class Contact extends FooModel {
                                 $elo = $elo->where($this->table . '.contact_name', '=', $value);
                             }
                             break;
+                        case 'contact_title':
+                            if (!empty($value)) {
+                                $elo = $elo->where($this->table . '.contact_title', '=', $value);
+                            }
+                            break;
+                        case 'contact_phone':
+                            if (!empty($value)) {
+                                $elo = $elo->where($this->table . '.contact_phone', '=', $value);
+                            }
+                            break;
+                        case 'contact_email':
+                            if (!empty($value)) {
+                                $elo = $elo->where($this->table . '.contact_email', '=', $value);
+                            }
+                            break;
                         case 'status':
                             if (!empty($value)) {
                                 $elo = $elo->where($this->table . '.'.$this->field_status, '=', $value);
@@ -251,8 +192,7 @@ class Contact extends FooModel {
                             if (!empty($value)) {
                                 $elo = $elo->where(function($elo) use ($value) {
                                     $elo->where($this->table . '.contact_name', 'LIKE', "%{$value}%")
-                                    ->orWhere($this->table . '.contact_description','LIKE', "%{$value}%")
-                                    ->orWhere($this->table . '.contact_overview','LIKE', "%{$value}%");
+                                    ->orWhere($this->table . '.contact_description','LIKE', "%{$value}%");
                                 });
                             }
                             break;
@@ -302,21 +242,22 @@ class Contact extends FooModel {
         if (empty($id)) {
             $id = $params['id'];
         }
-        $field_status = $this->field_status;
 
-        $contact = $this->selectItem($params);
+        $item = $this->find($id);
 
-        if (!empty($contact)) {
+        if (!empty($item)) {
             $dataFields = $this->getDataFields($params, $this->fields);
             
             foreach ($dataFields as $key => $value) {
-                $contact->$key = $value;
+                $item->$key = $value;
             }
 
+            $item->save();
+              //add new attribute
+            $item->id = $item->contact_id;
 
-            $contact->save();
 
-            return $contact;
+            return $item;
         } else {
             return NULL;
         }
@@ -331,9 +272,6 @@ class Contact extends FooModel {
     public function insertItem($params = []) {
 
         $dataFields = $this->getDataFields($params, $this->fields);
-
-     
-
 
         $item = self::create($dataFields);
 
@@ -399,10 +337,4 @@ class Contact extends FooModel {
 
         return $contact;
     }
-
-
-     
-
-
-
 }

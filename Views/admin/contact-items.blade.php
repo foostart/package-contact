@@ -1,4 +1,4 @@
-@extends('laravel-authentication-acl::admin.layouts.base-2cols')
+@extends('package-acl::admin.layouts.base-2cols')
 
 @section('title')
     {{ trans($plang_admin.'.pages.title-list') }}
@@ -77,24 +77,6 @@
         $(".delete").click(function () {
             return confirm("{!! trans($plang_admin.'.confirms.delete') !!}");
         });
-        $(document).ready(function(){
-            $("#selecctall").click(function(){
-                if($(this).is(":checked") == true)
-                    $(".btn-del").show();
-            else
-                    $(".btn-del").hide();
-                $(".ckbox").click();
-            });
-            $(".ckbox").click(function(){
-                if($(this).is(":checked") == true)
-                    $(".btn-del").show();
-                else
-                    $(".btn-del").hide();
-            });
-        });
-        $("#selecctall").change(function (){
-            $("input:checkbox").prop('checked', $(this).prop("checked"));
-    });
     </script>
     <!-- /END DELETE CONFIRM -->
 @stop

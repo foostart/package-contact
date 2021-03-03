@@ -21,7 +21,6 @@ View::composer([
                 'package-contact::admin.contact-search',
                 'package-contact::admin.contact-config',
                 'package-contact::admin.contact-lang',
-                'package-contact::admin.contact-sample',
     ], function ($view) {
 
         //Order by params
@@ -61,10 +60,6 @@ View::composer([
                 "url" => URL::route('contacts.lang', []),
                 'icon' => '<i class="fa fa-language" aria-hidden="true"></i>'
             ],
-            trans('contact-admin.sidebar.sample') => [
-                "url" => URL::route('contacts.sample', []),
-                'icon' => '<i class="fa fa-envelope-o" aria-hidden="true"></i>'
-            ],
         ];
 
         /**
@@ -78,9 +73,9 @@ View::composer([
         $orders = [
             '' => trans($plang_admin.'.form.no-selected'),
             'id' => trans($plang_admin.'.fields.id'),
-            'contact_name' => trans($plang_admin.'.fields.name'),
+            'contact_title' => trans($plang_admin.'.fields.title'),
             'updated_at' => trans($plang_admin.'.fields.updated_at'),
-            'contact_status' => trans($plang_admin.'.fields.contact_status'),
+            'status' => trans($plang_admin.'.fields.status'),
         ];
         $sortTable = new SortTable();
         $sortTable->setOrders($orders);

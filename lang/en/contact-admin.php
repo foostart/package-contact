@@ -33,6 +33,7 @@ return [
         'config' => 'Configurations',
         'lang' => 'Languages',
         'category' => 'Categories',
+        'sample' => 'Sample'
     ],
 
 
@@ -49,6 +50,7 @@ return [
     'columns' => [
         'order' => 'Order',
         '#' => '#',
+        'counter' => '#',
         'id' => 'Id',
         'name' => 'Contact name',
         'operations' => 'Operations',
@@ -99,6 +101,7 @@ return [
         'delete' => 'Delete',
         'delete-in-trash' => 'In trash',
         'delete-forever' => 'Forever',
+        'sent' => 'Sent'
     ],
 
 
@@ -146,7 +149,7 @@ return [
         'not-found' => 'Not found items',
         'config' => 'List of configurations',
         'lang' => 'List of languages',
-        'contact-status' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        'status' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
         'member'    => 'Search member',
         'email'    => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
         'message'    => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
@@ -193,7 +196,8 @@ return [
         'user-id'   => 'ID',
         'last-name' => 'Last name',
         'first-name'    => 'First name',
-        'contact_status' => 'status',
+        'status' => 'Status',
+        'title' => 'Title',
     ],
 
 
@@ -226,6 +230,7 @@ return [
         'message'        => 'Message',
         'answer'        => 'Answer',
         'title'        => 'Title',
+        'phone' => 'Phone'
     ],
 
 

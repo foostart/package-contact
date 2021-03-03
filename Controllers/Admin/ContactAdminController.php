@@ -92,7 +92,7 @@ class ContactAdminController extends FooController {
             'items' => $items,
             'request' => $request,
             'params' => $params,
-            'statuses' => $this->statuses,
+            'config_status' => $this->obj_item->config_status
         ));
 
         return view($this->page_views['admin']['items'], $this->data_view);
@@ -137,7 +137,6 @@ class ContactAdminController extends FooController {
             'categories' => $categories,
             'request' => $request,
             'context' => $context,
-            'statuses' => $this->statuses,
         ));
         return view($this->page_views['admin']['edit'], $this->data_view);
     }
@@ -463,70 +462,5 @@ class ContactAdminController extends FooController {
 
         }
     }
-
-    /**
-     * Show sample
-     * @return view sample
-     * @date 24/04/2018
-     */
-    public function sample(Request $request) {
-
-        $item = NULL;
-        $categories = NULL;
-
-        $params = $request->all();
-        $params['id'] = $request->get('id', NULL);
-
-        // display view
-        $this->data_view = array_merge($this->data_view, array(
-            'item' => $item,
-            'categories' => $categories,
-            'request' => $request,
-        ));
-        return view($this->page_views['admin']['sample'], $this->data_view);
-    }
-/**
-     * Add sample
-     * @return view sample
-     * @date 02/05/2018
-     */
-    public function addSample(Request $request) {
-
-        $item = NULL;
-
-        $params = $request->all();
-
-
-        $id = (int) $request->get('id');
-        $is_valid_request = $this->isValidRequest($request);
-        //var_dump($this->page_views['admin']);die();
-
-
-        //if ($is_valid_request && $this->obj_validator->validate($params)) {// valid data
-        // add new item
-            $item = $this->obj_item->insertSample($params);
-
-            if (!empty($item)) {
-
-                    //message
-                    return Redirect::route($this->root_router.'.sample', ["id" => $item->id])
-                                    ->withMessage(trans($this->plang_admin.'.actions.add-ok'));
-                } else {
-
-                    //message
-                    return Redirect::route($this->root_router.'.sample', ["id" => $item->id])
-                                    ->withMessage(trans($this->plang_admin.'.actions.add-error'));
-
-                }
-                    // } else { // invalid data
-
-                    //     $errors = $this->obj_validator->getErrors();
-
-                    //     // passing the id incase fails editing an already existing item
-                    //     return Redirect::route($this->root_router.'.edit', $id ? ["id" => $id]: [])
-                    //             ->withInput()->withErrors($errors);
-                    // }
-    }
-
 
 }
